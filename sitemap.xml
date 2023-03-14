@@ -7,19 +7,19 @@
         <loc>https://digicash.cf/</loc>
     </url>
     <url>
-        <loc>https://digicash.cf/log-out.html</loc>
-    </url>
-    <url>
         <loc>https://digicash.cf/login.html</loc>
     </url>
     <url>
         <loc>https://digicash.cf/logo.html</loc>
     </url>
     <url>
+        <loc>https://digicash.cf/logout.html</loc>
+    </url>
+    <url>
         <loc>https://digicash.cf/profile.html</loc>
     </url>
     <url>
-        <loc>https://digicash.cf/register.html</loc>
+        <loc>https://digicash.cf/signup.html</loc>
     </url>
     <url>
         <loc>https://digicash.cf/table.html</loc>

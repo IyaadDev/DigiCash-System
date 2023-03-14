@@ -25,7 +25,7 @@
                     <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="table.html"><i class="fas fa-table"></i><span>Table</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="login.html"><i class="far fa-user-circle"></i><span>Login</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="register.html"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup.html"><i class="fas fa-user-circle"></i><span>Register</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -180,19 +180,77 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
     .catch(error => console.error(error));
 </script>
                         </div>
-                        <div class="col-md-6 col-xl-3 mb-4">
-                            <div class="card shadow border-start-success py-2">
-                                <div class="card-body">
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col me-2">
-                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>Earnings (annual)</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$215,000</span></div>
-                                        </div>
-                                        <div class="col-auto"><i class="fas fa-dollar-sign fa-2x text-gray-300"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4"><div class="card shadow border-start-success py-2">
+  <div class="card-body">
+    <div class="row align-items-center no-gutters">
+      <div class="col me-2">
+        <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>DigiCash Balance</span></div>
+        <div id="balance" class="text-dark fw-bold h5 mb-0"><span></span></div>
+        <div id="digi-cash" class="text-uppercase text-success fw-bold text-xs mb-1"><span></span></div>
+      </div>
+      <div class="col-auto"><svg class="bi bi-cash fa-2x text-gray-300" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" style="color: rgb(0,0,0)!important;">
+              <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
+              <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"></path>
+          </svg></div>
+    </div>
+  </div>
+</div>
+
+<script>
+      const accessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
+  const baseId = 'appj9R8cdDKBA2Khb';
+  const tableName = 'accounts';
+  const accountsUrl = `https://api.airtable.com/v0/${baseId}/accounts`;
+
+    function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop().split(';').shift();
+  }
+}
+
+  const getBalance = () => {
+    const cookieData = getCookie("account");
+    if (!cookieData) {
+      console.log("No user data found in cookie.");
+      return;
+    }
+    const username = JSON.parse(cookieData).username;
+
+    const balanceEl = document.querySelector("#balance span");
+    const digiCashEl = document.querySelector("#digi-cash span");
+
+    fetch(accountsUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Data from Airtable API: ", data);
+        const userRecord = data.records.find(
+          (record) => record.fields.username === username
+        );
+        const userBalance = userRecord.fields.balance;
+        const formattedBalance = userBalance.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        });
+        balanceEl.innerHTML = formattedBalance.match(/[\d\.]+/)[0];
+        digiCashEl.innerHTML = "DigiCash";
+      })
+      .catch((error) => {
+        console.log("Error fetching data from Airtable API: ", error);
+        balanceEl.innerHTML = "Error fetching balance";
+      });
+  };
+
+  getBalance();
+</script>
+</div>
                         <div class="col-md-6 col-xl-3 mb-4">
                             <div class="card shadow border-start-info py-2">
                                 <div class="card-body">
