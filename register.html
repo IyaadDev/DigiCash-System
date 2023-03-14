@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Register - DigiCash Dashboard</title>
+    <meta name="description" content="The one dashboard to manage your DigiCash. Don't have any? Create an account and get some free credits">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=cb606d99bb2418df19b6bc818b41e412">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css?h=c6d4f54ff5f7e221a70cdd46daa396b3">
+    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-Dark-icons.css?h=befd8a398792e305b7ffd4a176b5b585">
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card shadow-lg o-hidden border-0 my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-flex">
+                        <div class="flex-grow-1 bg-register-image" style="background-image: url(&quot;assets/img/dogs/image2.jpeg?h=93282ca2d6d513a968a91023659be678&quot;);"></div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h4 class="text-dark mb-4">Create an Account!</h4>
+                            </div><!-- Start: Form --><form class="user" id="signup-form">
+  <div class="row mb-3">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <input id="exampleFirstName" class="form-control form-control-user" type="text" placeholder="First Name" name="first-name" />
+    </div>
+    <div class="col-sm-6">
+      <input id="exampleLastName" class="form-control form-control-user" type="text" placeholder="Last Name" name="last-name" />
+    </div>
+  </div>
+  <div class="mb-3">
+    <input id="exampleInputEmail" class="form-control form-control-user" type="email" aria-describedby="emailHelp" placeholder="Email Address" name="email" />
+  </div>
+  <div class="mb-3">
+    <input id="exampleUsername" class="form-control form-control-user" type="text" placeholder="Username" name="username" />
+  </div>
+  <div class="row mb-3">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <input id="examplePasswordInput" class="form-control form-control-user" type="password" placeholder="Password" name="password" />
+    </div>
+    <div class="col-sm-6">
+      <input id="exampleRepeatPasswordInput" class="form-control form-control-user" type="password" placeholder="Repeat Password" name="password_repeat" />
+    </div>
+  </div>
+  <button class="btn btn-primary d-block btn-user w-100" type="submit">Register Account</button>
+  <hr />
+  <a class="btn btn-primary d-block btn-google btn-user w-100 mb-2" role="button"><i class="fab fa-google"></i>  Register with Google</a>
+  <a class="btn btn-primary d-block btn-facebook btn-user w-100" role="button"><i class="fab fa-facebook-f"></i>  Register with Facebook</a>
+  <hr />
+</form><!-- End: Form -->
+                            <!-- Start: Script --><script>
+  const form = document.getElementById("signup-form");
+  const errorContainer = document.getElementById("error-container");
+  const warningContainer = document.getElementById("warning-container");
+  
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const firstName = data.get("first-name");
+    const lastName = data.get("last-name");
+    const email = data.get("email");
+    const username = data.get("username");
+    const password = data.get("password");
+    const passwordRepeat = data.get("password_repeat");
+
+    if (password !== passwordRepeat) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    const pin = Math.floor(1000 + Math.random() * 9000);
+    const balance = 25;
+
+    fetch("https://api.airtable.com/v0/appj9R8cdDKBA2Khb/accounts", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "fields": {
+          "first-name": firstName,
+          "last-name": lastName,
+          "email": email,
+          "username": username,
+          "password": password,
+          "pin": pin,
+          "balance": balance
+        }
+      })
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((data) => {
+          const account = data;
+          const expires = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+          document.cookie = `account=${JSON.stringify(account.fields)}${expires}; path=/`;
+          alert("Sign up successful!");
+          form.reset();
+          window.location.href = "dashboard.html";
+        });
+      } else if (response.status === 422) {
+        alert("An account with the same username already exists. Please sign in instead.");
+      }
+    }).catch((error) => {
+      console.error(error);
+      alert("An error occurred. Please try again later.");
+    });
+  });
+</script>
+
+
+<!-- End: Script -->
+                            <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
+                            <div class="text-center"><a class="small" href="login.html">Already have an account? Login!</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js?h=79ff9637b74326c362fb6f7f5801a7ba"></script>
+    <script src="assets/js/bs-init.js?h=e2b0d57f2c4a9b0d13919304f87f79ae"></script>
+    <script src="assets/js/theme.js?h=79f403485707cf2617c5bc5a2d386bb0"></script>
+</body>
+
+</html>

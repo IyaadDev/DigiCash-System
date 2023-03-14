@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Login - DigiCash Dashboard</title>
+    <meta name="description" content="The one dashboard to manage your DigiCash. Don't have any? Create an account and get some free credits">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=cb606d99bb2418df19b6bc818b41e412">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css?h=c6d4f54ff5f7e221a70cdd46daa396b3">
+    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-Dark-icons.css?h=befd8a398792e305b7ffd4a176b5b585">
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-12 col-xl-10">
+                <div class="card shadow-lg o-hidden border-0 my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-flex">
+                                <div class="flex-grow-1 bg-login-image" style="background-image: url(&quot;assets/img/side.webp?h=5a1b9fae31806fc35babe937b0c10b6f&quot;);"></div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h4 class="text-dark mb-4">Welcome Back!</h4>
+                                    </div>
+                                    <form class="user">
+                                        <div class="mb-3"><input class="form-control form-control form-control-user" type="text" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Username..." name="username"></div>
+                                        <div class="mb-3"><input class="form-control form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password"></div>
+                                        <div class="mb-3">
+                                            <div class="custom-control custom-checkbox small">
+                                                <div class="form-check"><input type="checkbox" id="formCheck-1" class="form-check-input custom-control-input" name="remember-me"><label class="form-label form-check-label custom-control-label" for="formCheck-1">Remember Me</label></div>
+                                            </div>
+                                        </div><button class="btn btn-primary d-block btn-user w-100" type="submit">Login</button>
+                                        <hr><a class="btn btn-primary disabled d-block btn-google btn-user w-100 mb-2" role="button"><i class="fab fa-google"></i> Login with Google (Coming soon)</a><a class="btn btn-primary disabled d-block btn-facebook btn-user w-100" role="button"><i class="fab fa-facebook-f"></i> Login with Facebook (Coming soon)</a>
+                                        <hr>
+                                    </form><script>
+  const form = document.querySelector('.user');
+  const usernameParam = new URLSearchParams(window.location.search).get('username');
+  const passwordParam = new URLSearchParams(window.location.search).get('password');
+  
+  if (usernameParam && passwordParam) {
+    form.querySelector('input[name="username"]').value = usernameParam;
+    form.querySelector('input[name="password"]').value = passwordParam;
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const username = form.querySelector('input[name="username"]').value;
+    const password = form.querySelector('input[name="password"]').value;
+    const rememberMe = form.querySelector('input[name="remember-me"]').checked;
+
+    fetch('https://api.airtable.com/v0/appj9R8cdDKBA2Khb/accounts', {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d'
+      }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      const account = data.records.find((record) => record.fields.username === username && record.fields.password === password);
+      if (account) {
+        const expires = rememberMe ? '; expires=' + new Date(Date.now() + 604800000).toUTCString() : '';
+        document.cookie = `account=${JSON.stringify(account.fields)}${expires}; path=/`;
+       window.location.replace('dashboard.html');
+      } else {
+        alert('Invalid username or password');
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      alert('An error occurred. Please try again later.');
+    });
+  });
+</script>
+                                    <div class="text-center"><a class="small" href="index.html">Back home</a></div>
+                                    <div class="text-center"><a class="small" href="forgot-password.html">Forgot Password?</a></div>
+                                    <div class="text-center"><a class="small" href="register.html">Create an Account!</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js?h=79ff9637b74326c362fb6f7f5801a7ba"></script>
+    <script src="assets/js/bs-init.js?h=e2b0d57f2c4a9b0d13919304f87f79ae"></script>
+    <script src="assets/js/theme.js?h=79f403485707cf2617c5bc5a2d386bb0"></script>
+</body>
+
+</html>
