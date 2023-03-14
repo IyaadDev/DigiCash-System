@@ -201,101 +201,132 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <div class="card shadow mb-3">
-                                        <!-- Start: Scri[t --><script>
-    const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const username = urlParams.get('username');
+                                    <!-- Start: Updateform --><div class="card shadow mb-3">
+    <div class="card-header py-3">
+        <p class="text-primary m-0 fw-bold">User Settings</p>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label class="form-label" for="username"><strong>Username</strong></label>
+                        <input id="username" class="form-control" type="text" placeholder="user.name" name="username" required />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label class="form-label" for="email"><strong>Email Address</strong></label>
+                        <input id="email" class="form-control" type="email" placeholder="user@example.com" name="email" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <label class="form-label" for="first_name"><strong>First Name</strong></label>
+                        <input id="first_name" class="form-control" type="text" placeholder="John" name="first_name" required />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label class="form-label" for="last_name"><strong>Last Name</strong></label>
+                        <input id="last_name" class="form-control" type="text" placeholder="Doe" name="last_name" required />
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button id="saveSettingsButton" class="btn btn-primary btn-sm" type="submit">Save Settings</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- End: Updateform -->
+                                    <!-- Start: Script --><script>
+    const accessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
+    const baseId = 'appj9R8cdDKBA2Khb';
+    const tableName = 'accounts';
+    const accountsUrl = `https://api.airtable.com/v0/${baseId}/${tableName}`;
+    const accountCookieName = 'account';
 
-const personalAccessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
-const baseId = 'appj9R8cdDKBA2Khb';
-const tableName = 'accounts';
+    // Retrieve account data from cookie
+    const getAccountFromCookie = () => {
+      const cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith(`${accountCookieName}=`))
+        ?.split('=')[1];
+      
+      return cookieValue ? JSON.parse(cookieValue) : null;
+    }
 
-const headers = {
-  Authorization: `Bearer ${personalAccessToken}`,
-  'Content-Type': 'application/json',
-};
+    // Update account data in cookie
+    const updateAccountCookie = (newData) => {
+      const existingCookie = getAccountFromCookie();
+      const updatedData = {...existingCookie?.fields, ...newData};
+      const expires = "; expires=Thu, 01 Jan 2099 00:00:00 UTC";
+      document.cookie = `${accountCookieName}=${JSON.stringify({fields: updatedData})}${expires}; path=/`;
+    }
 
-const getAccount = async (username) => {
-  const url = `https://api.airtable.com/v0/${baseId}/${tableName}?filterByFormula={username}='${username}'`;
-  const response = await fetch(url, { headers });
-  const data = await response.json();
-  if (data.records && data.records.length > 0) {
-    return data.records[0];
-  }
-  return null;
-};
+    // Update account data in Airtable
+    const updateAccountInAirtable = async (newData) => {
+      const existingData = getAccountFromCookie()?.fields;
+      const updatedData = {...existingData, ...newData};
+      
+      const response = await fetch(accountsUrl, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          records: [{
+            id: existingData.id,
+            fields: updatedData
+          }]
+        })
+      });
 
-const prefillForm = (account) => {
-  console.log('Prefilling form with account data:', account);
-  if (account) {
-    document.getElementById('username').value = account.fields.username || '';
-    document.getElementById('email').value = account.fields.email || '';
-    document.getElementById('first_name').value = account.fields['first-name'] || '';
-    document.getElementById('last_name').value = account.fields['last-name'] || '';
-  }
-};
+      if (!response.ok) {
+        throw new Error('Failed to update account data in Airtable');
+      }
+    }
 
-const updateAccount = async (event) => {
-  event.preventDefault();
-  const account = await getAccount(username);
-  if (!account) {
-    console.error(`Account not found for username ${username}`);
-    return;
-  }
-  console.log('Updating account with data:', account.fields);
-  account.fields.username = document.getElementById('username').value;
-  account.fields.email = document.getElementById('email').value;
-  account.fields['first-name'] = document.getElementById('first_name').value;
-  account.fields['last-name'] = document.getElementById('last_name').value;
-  const url = `https://api.airtable.com/v0/${baseId}/${tableName}/${account.id}`;
-  const response = await fetch(url, {
-    method: 'PATCH',
-    headers,
-    body: JSON.stringify({
-      fields: account.fields,
-    }),
-  });
-  const data = await response.json();
-  console.log('Account updated successfully:', data);
-  const expires = '; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-  document.cookie = `account=${JSON.stringify(account.fields)}${expires}`;
-  window.location.href = `/profile.html?username=${account.fields.username}&email=${account.fields.email}&first_name=${account.fields['first-name']}&last_name=${account.fields['last-name']}`;
-};
+    // Handle form submit event
+    const handleFormSubmit = async (event) => {
+      event.preventDefault();
+      
+      const formData = new FormData(event.target);
+      const newData = {
+        'first-name': formData.get('first_name'),
+        'last-name': formData.get('last_name'),
+        'email': formData.get('email'),
+        'username': formData.get('username')
+      };
 
-(async () => {
-  const account = await getAccount(username);
-  console.log('Retrieved account data:', account);
-  prefillForm(account);
-  document.getElementById('saveSettings').addEventListener('click', updateAccount);
-})();
+      // Check if all fields are filled
+      if (Object.values(newData).some(value => !value)) {
+        alert('Please fill in all fields');
+        return;
+      }
 
-</script><!-- End: Scri[t -->
-                                        <div class="card-header py-3">
-                                            <p class="text-primary m-0 fw-bold">User Settings</p>
-                                        </div>
-                                        <div class="card-body">
-                                            <form>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="username"><strong>Username</strong></label><input class="form-control" type="text" id="username" placeholder="user.name" name="username"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="email"><strong>Email Address</strong></label><input class="form-control" type="email" id="email" placeholder="user@example.com" name="email"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="first_name"><strong>First Name</strong></label><input class="form-control" type="text" id="first_name" placeholder="John" name="first_name"></div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="mb-3"><label class="form-label" for="last_name"><strong>Last Name</strong></label><input class="form-control" type="text" id="last_name" placeholder="Doe" name="last_name"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
-                                            </form>
-                                        </div>
-                                    </div>
+      try {
+        await updateAccountInAirtable(newData);
+        updateAccountCookie(newData);
+        alert('Account data updated successfully!');
+      } catch (error) {
+        console.error(error);
+        alert('Failed to update account data');
+      }
+    }
+
+    // Add event listener to form submit button
+    const saveSettingsButton = document.querySelector('#save-settings');
+    if (saveSettingsButton) {
+      saveSettingsButton.addEventListener('click', handleFormSubmit);
+    }
+
+</script>
+<!-- End: Script -->
                                     <div class="card shadow">
                                         <div class="card-header py-3">
                                             <p class="text-primary m-0 fw-bold">Contact Settings</p>
