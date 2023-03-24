@@ -1,27 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://digicash.cf/dashboard.html</loc>
+        <loc>https://beta.digicash.cf/app/dashboard.html</loc>
     </url>
     <url>
-        <loc>https://digicash.cf/</loc>
+        <loc>https://beta.digicash.cf/app/profile.html</loc>
     </url>
     <url>
-        <loc>https://digicash.cf/login.html</loc>
+        <loc>https://beta.digicash.cf/app/table.html</loc>
     </url>
     <url>
-        <loc>https://digicash.cf/logo.html</loc>
+        <loc>https://beta.digicash.cf/app/transfer.html</loc>
     </url>
     <url>
-        <loc>https://digicash.cf/logout.html</loc>
+        <loc>https://beta.digicash.cf/support/forgot.html</loc>
     </url>
     <url>
-        <loc>https://digicash.cf/profile.html</loc>
+        <loc>https://beta.digicash.cf/about.html</loc>
     </url>
     <url>
-        <loc>https://digicash.cf/signup.html</loc>
+        <loc>https://beta.digicash.cf/account-reclamation.html</loc>
     </url>
     <url>
-        <loc>https://digicash.cf/table.html</loc>
+        <loc>https://beta.digicash.cf/forgot-password.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/forgot-password-why.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/index-logged-in.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/login.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/logo.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/logout.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/signup.html</loc>
     </url>
 </urlset>
