@@ -188,7 +188,7 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase fw-bold text-primary text-xs mb-1"><span>Current DigiCash Value</span></div>
+                                            <div class="text-capitalize fw-bold text-primary text-xs mb-1" style="font-size: 15px;"><span>Current DigiCash Value</span></div>
                                             <div class="fw-bold text-dark h5 mb-0"><span id="price"></span></div>
                                             <div class="text-xs mt-1"><span id="change"></span></div>
                                         </div>
@@ -243,43 +243,43 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                                     </div>
                                 </div>
                             </div><script>
-      const accessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
-  const baseId = 'appj9R8cdDKBA2Khb';
-  const tableName = 'accounts';
-  const accountsUrl = `https://api.airtable.com/v0/${baseId}/accounts`;
-
-    function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) {
-    return parts.pop().split(';').shift();
-  }
-}
-
-  const getBalance = () => {
+    const getBalance = () => {
     const cookieData = getCookie("account");
     if (!cookieData) {
       console.log("No user data found in cookie.");
       return;
     }
     const username = JSON.parse(cookieData).username;
+  const dashboardsAccessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
+  const dashboardsBaseId = 'appj9R8cdDKBA2Khb';
+  const dashboardsTableName = 'accounts';
+  const dashboardsUrl = `https://api.airtable.com/v0/${dashboardsBaseId}/${dashboardsTableName}?filterByFormula=AND(username="${username}")`;
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop().split(';').shift();
+    }
+  }
+
+  
+    
 
     const balanceEl = document.querySelector("#balance span");
     const digiCashEl = document.querySelector("#digi-cash span");
 
-    fetch(accountsUrl, {
+    fetch(dashboardsUrl, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${dashboardsAccessToken}`,
         "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Data from Airtable API: ", data);
-        const userRecord = data.records.find(
-          (record) => record.fields.username === username
-        );
+        const userRecord = data.records[0];
         const userBalance = userRecord.fields.balance;
         const formattedBalance = userBalance.toLocaleString("en-US", {
           style: "currency",
@@ -296,13 +296,14 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
 
   getBalance();
 </script>
+
                         </div>
                         <div class="col-md-6 col-xl-3 mb-4">
                             <div class="card shadow border-start-info py-2">
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Tasks</span></div>
+                                            <div class="text-uppercase text-info fw-bold text-xs mb-1"><span class="text-capitalize" style="font-size: 15px;">total digicash value</span></div>
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-auto">
                                                     <div class="text-dark fw-bold h5 mb-0 me-3"><span>50%</span></div>
