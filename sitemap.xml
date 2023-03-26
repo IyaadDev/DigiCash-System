@@ -10,9 +10,6 @@
         <loc>https://beta.digicash.cf/app/profile.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/app/table.html</loc>
-    </url>
-    <url>
         <loc>https://beta.digicash.cf/app/transfer.html</loc>
     </url>
     <url>
@@ -34,6 +31,9 @@
         <loc>https://beta.digicash.cf/account-reclamation.html</loc>
     </url>
     <url>
+        <loc>https://beta.digicash.cf/dashboard.html</loc>
+    </url>
+    <url>
         <loc>https://beta.digicash.cf/forgot-password.html</loc>
     </url>
     <url>
@@ -53,6 +53,9 @@
     </url>
     <url>
         <loc>https://beta.digicash.cf/logout.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/profile.html</loc>
     </url>
     <url>
         <loc>https://beta.digicash.cf/signup.html</loc>

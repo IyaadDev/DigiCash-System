@@ -26,6 +26,96 @@ console.log("Service Name: ", serviceName);
 console.log("Amount: ", amount);
 console.log("Redirect URL: ", redirectUrl);
 
+</script>
+<h1>Payment Terminal</h1>
+<div>
+  <label for="service-name">Service Name:</label>
+  <input type="text" id="service-name" name="service-name" value="">
+</div>
+<div>
+  <label for="amount">Amount:</label>
+  <input type="number" id="amount" name="amount" value="">
+</div>
+<button id="pay-button">Confirm Payment</button>
+<script>
+  const paymentTerminalQueryString = window.location.search;
+  const paymentTerminalParams = new URLSearchParams(paymentTerminalQueryString);
+  const paymentTerminalServiceName = paymentTerminalParams.get('service');
+  const paymentTerminalAmount = paymentTerminalParams.get('amount');
+  const paymentTerminalRedirectUrl = paymentTerminalParams.get('redirect_url');
+
+  console.log("Service Name: ", paymentTerminalServiceName);
+  console.log("Amount: ", paymentTerminalAmount);
+  console.log("Redirect URL: ", paymentTerminalRedirectUrl);
+
+  document.getElementById('service-name').value = paymentTerminalServiceName;
+  document.getElementById('amount').value = paymentTerminalAmount;
+
+  const paymentTerminalPayButton = document.getElementById('pay-button');
+  paymentTerminalPayButton.addEventListener('click', function() {
+    const paymentTerminalAccountCookie = document.cookie.split('; ').find(row => row.startsWith('account='));
+    if (!paymentTerminalAccountCookie) {
+      alert('Please log in to continue');
+      return;
+    }
+    const paymentTerminalAccount = JSON.parse(paymentTerminalAccountCookie.split('=')[1]);
+    console.log(paymentTerminalAccount);
+    const paymentTerminalUsername = paymentTerminalAccount['username'];
+    const paymentTerminalAirtableApiKey = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
+    const paymentTerminalBaseId = 'appj9R8cdDKBA2Khb';
+    const paymentTerminalTableName = 'accounts';
+    const paymentTerminalBalanceField = 'balance';
+    const paymentTerminalAirtableApiUrl = `https://api.airtable.com/v0/${paymentTerminalBaseId}/${paymentTerminalTableName}?filterByFormula={username}='${paymentTerminalUsername}'`;
+    const paymentTerminalFetchOptions = {
+      headers: {
+        'Authorization': `Bearer ${paymentTerminalAirtableApiKey}`,
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(paymentTerminalAirtableApiUrl, paymentTerminalFetchOptions)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data.records.length !== 1) {
+          alert('Account not found');
+          return;
+        }
+        const paymentTerminalRecord = data.records[0];
+        const paymentTerminalAirtableBalance = paymentTerminalRecord.fields[paymentTerminalBalanceField];
+        console.log(`Airtable Balance: ${paymentTerminalAirtableBalance}`);
+        const paymentTerminalNewBalance = paymentTerminalAirtableBalance - paymentTerminalAmount;
+        if (paymentTerminalNewBalance < 0) {
+          alert('Insufficient funds');
+          return;
+        }
+        const paymentTerminalRecordId = paymentTerminalRecord.id;
+        const paymentTerminalAirtableUpdateUrl = `https://api.airtable.com/v0/${paymentTerminalBaseId}/${paymentTerminalTableName}/${paymentTerminalRecordId}`;
+        const paymentTerminalAirtableUpdateData = {
+          fields: {
+            [paymentTerminalBalanceField]: paymentTerminalNewBalance
+          }
+        };
+        fetch(paymentTerminalAirtableUpdateUrl, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${paymentTerminalAirtableApiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(paymentTerminalAirtableUpdateData)
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            alert('Payment successful');
+            window.location.href = paymentTerminalRedirectUrl;
+          })
+          .catch(error => {
+            console.error(error);
+            alert('An error occurred while updating the account balance');
+          });
+      })
+      .catch(error => {
+       
 </script><!-- End: Javascript -->
     <div id="wrapper">
         <div class="d-flex flex-column" id="content-wrapper" style="margin-top: 20px;border-radius: 10px;background: #eaf1f4;margin-right: 20px;border-style: solid;border-color: rgb(242,242,242);">
@@ -109,6 +199,7 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
             </div>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+    <p class="font-monospace" style="font-family: monospace!important;">DigiCash Banking System -v0.8.1</p>
     <script src="../assets/bootstrap/js/bootstrap.min.js?h=79ff9637b74326c362fb6f7f5801a7ba"></script>
     <script src="../assets/js/bs-init.js?h=bd1e7bf16294cd29af0339e7c8132178"></script>
     <script src="../assets/js/404.js?h=67ec544d8b6812edadaf7491d9124ade"></script>
