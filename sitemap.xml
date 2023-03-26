@@ -4,6 +4,9 @@
         <loc>https://beta.digicash.cf/app/dashboard.html</loc>
     </url>
     <url>
+        <loc>https://beta.digicash.cf/app/</loc>
+    </url>
+    <url>
         <loc>https://beta.digicash.cf/app/profile.html</loc>
     </url>
     <url>
@@ -14,6 +17,12 @@
     </url>
     <url>
         <loc>https://beta.digicash.cf/support/forgot.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/terminal/payment.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/terminal/terminal-nli.html</loc>
     </url>
     <url>
         <loc>https://beta.digicash.cf/404.html</loc>
