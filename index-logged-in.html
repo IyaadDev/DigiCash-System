@@ -148,6 +148,55 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
         </div><!-- End: 2 Rows 1+2 Columns -->
     </section>
     <p class="font-monospace" style="font-family: monospace!important;">DigiCash Banking System -v0.8.1</p>
+    <section style="margin-top: 102px;">
+        <h1 class="display-4 text-center" style="color: rgb(0,0,0);font-weight: bold;margin-top: 30px;">How's DigiCash?</h1>
+        <div class="container text-center d-xl-flex justify-content-xl-center">
+            <div class="col-md-6 col-xl-3 mb-4">
+                <div class="card shadow border-start-primary py-2">
+                    <div class="card-body">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col me-2">
+                                <div class="text-capitalize fw-bold text-primary text-xs mb-1" style="font-size: 15px;"><span>Current DigiCash Value</span></div>
+                                <div class="fw-bold text-dark h5 mb-0"><span id="price"></span></div>
+                                <div class="text-xs mt-1"><span id="change"></span></div>
+                            </div>
+                            <div class="col-auto"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-currency-dollar fa-2x text-gray-300" style="color: rgb(0,0,0)!important;font-size: 48px;">
+                                    <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"></path>
+                                </svg></div>
+                        </div>
+                    </div>
+                </div><script>
+  // fetch the price data
+  fetch('app/price.txt')
+    .then(response => response.text())
+    .then(data => {
+      const price = parseFloat(data.trim());
+      document.getElementById('price').textContent = `AED${price.toFixed(2)}`;
+      
+      // fetch the last price data
+      fetch('app/lastprice.txt')
+        .then(response => response.text())
+        .then(data => {
+          const lastPrice = parseFloat(data.trim());
+          const percentageChange = ((price - lastPrice) / lastPrice) * 100;
+          const changeElement = document.getElementById('change');
+          changeElement.textContent = `${percentageChange.toFixed(2)}%`;
+          
+          // determine whether the change is positive or negative
+          if (percentageChange > 0) {
+            changeElement.style.color = 'green';
+            changeElement.textContent = `+${percentageChange.toFixed(2)}%`;
+          } else if (percentageChange < 0) {
+            changeElement.style.color = 'red';
+          }
+        })
+        .catch(error => console.error(error));
+    })
+    .catch(error => console.error(error));
+</script>
+            </div>
+        </div>
+    </section>
     <script src="assets/bootstrap/js/bootstrap.min.js?h=79ff9637b74326c362fb6f7f5801a7ba"></script>
     <script src="assets/js/bs-init.js?h=bd1e7bf16294cd29af0339e7c8132178"></script>
     <script src="assets/js/404.js?h=67ec544d8b6812edadaf7491d9124ade"></script>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>DigiCash Dashboard</title>
+    <meta name="description" content="The one dashboard to manage your DigiCash. Don't have any? Create an account and get some free credits">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=cb606d99bb2418df19b6bc818b41e412">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/404-NOT-FOUND-animated.css?h=922bc36ebfe2d8d5a139e1071fb49b2c">
+    <link rel="stylesheet" href="assets/css/Bootstrap-Callout-Danger.css?h=42712a1218a3f115163d943aef23cb21">
+    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-Dark-icons.css?h=1fb7478465b62bffaafc5ff7d3ec5853">
+</head>
+
+<body><script>
+  // Function to get URL parameter values
+  const getParamValues = (url) => {
+    const params = {};
+    url.split("?")[1].split("&").forEach((param) => {
+      const [key, value] = param.split("=");
+      params[key] = value;
+    });
+    return params;
+  };
+
+  // Get the authorization code from the URL
+  const { code } = getParamValues(window.location.href);
+
+  // Exchange the authorization code for an access token
+  fetch("https://github.com/login/oauth/access_token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      client_id: "254000e38f2e214f5d09",
+      client_secret: "64b7e747e83f56380d539df687eba0fc5db6768d",
+      code,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Use the access token to fetch the user's information
+      fetch("https://api.github.com/user", {
+        headers: {
+          Authorization: `token ${data.access_token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((user) => {
+          // Display the user's information
+          console.log(user);
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("An error occurred. Please try again later.");
+        });
+    })
+    .catch((error) => {
+      console.error(error);
+      alert("An error occurred. Please try again later.");
+    });
+</script>
+
+    <script src="assets/bootstrap/js/bootstrap.min.js?h=79ff9637b74326c362fb6f7f5801a7ba"></script>
+    <script src="assets/js/bs-init.js?h=bd1e7bf16294cd29af0339e7c8132178"></script>
+    <script src="assets/js/404.js?h=67ec544d8b6812edadaf7491d9124ade"></script>
+    <script src="assets/js/theme.js?h=79f403485707cf2617c5bc5a2d386bb0"></script>
+</body>
+
+</html>

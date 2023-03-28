@@ -46,6 +46,9 @@
         <loc>https://beta.digicash.cf/forgot-password-why.html</loc>
     </url>
     <url>
+        <loc>https://beta.digicash.cf/github-auth.html</loc>
+    </url>
+    <url>
         <loc>https://beta.digicash.cf/</loc>
     </url>
     <url>
@@ -65,5 +68,8 @@
     </url>
     <url>
         <loc>https://beta.digicash.cf/signup.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/untitled.html</loc>
     </url>
 </urlset>
