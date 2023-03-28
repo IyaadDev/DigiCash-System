@@ -22,10 +22,16 @@
         <loc>https://beta.digicash.cf/support/forgot.html</loc>
     </url>
     <url>
+        <loc>https://beta.digicash.cf/tac/</loc>
+    </url>
+    <url>
         <loc>https://beta.digicash.cf/terminal/payment.html</loc>
     </url>
     <url>
         <loc>https://beta.digicash.cf/terminal/terminal-nli.html</loc>
+    </url>
+    <url>
+        <loc>https://beta.digicash.cf/terms/</loc>
     </url>
     <url>
         <loc>https://beta.digicash.cf/404.html</loc>
@@ -68,8 +74,5 @@
     </url>
     <url>
         <loc>https://beta.digicash.cf/signup.html</loc>
-    </url>
-    <url>
-        <loc>https://beta.digicash.cf/untitled.html</loc>
     </url>
 </urlset>
