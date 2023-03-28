@@ -8,7 +8,8 @@
     <meta name="description" content="The one dashboard to manage your DigiCash. Don't have any? Create an account and get some free credits">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=cb606d99bb2418df19b6bc818b41e412">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
-    <link rel="stylesheet" href="assets/css/404-NOT-FOUND-animated.css?h=7c15049d11d92c8485c97eca7985f850">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css?h=e7cfb9ec830984d637c4aed91cd725c5">
+    <link rel="stylesheet" href="assets/css/404-NOT-FOUND-animated.css?h=922bc36ebfe2d8d5a139e1071fb49b2c">
     <link rel="stylesheet" href="assets/css/Bootstrap-Callout-Danger.css?h=42712a1218a3f115163d943aef23cb21">
     <link rel="stylesheet" href="assets/css/Navbar-Right-Links-Dark-icons.css?h=1fb7478465b62bffaafc5ff7d3ec5853">
 </head>
@@ -30,32 +31,19 @@
                         <div class="p-5">
                             <div class="text-center">
                                 <h4 class="text-dark mb-4">Create an Account!</h4>
-                            </div><!-- Start: Form --><form class="user" id="signup-form">
-  <div class="row mb-3">
-    <div class="col-sm-6 mb-3 mb-sm-0">
-      <input id="exampleFirstName" class="form-control form-control-user" type="text" placeholder="First Name" name="first-name" />
+                            </div><!-- Start: Form --><form id="signup-form" class="user">
+    <div class="row mb-3">
+        <div class="col-sm-6 mb-3 mb-sm-0"><input id="exampleFirstName" class="form-control form-control form-control-user" type="text" placeholder="First Name" name="first-name" /></div>
+        <div class="col-sm-6"><input id="exampleLastName" class="form-control form-control form-control-user" type="text" placeholder="Last Name" name="last-name" /></div>
     </div>
-    <div class="col-sm-6">
-      <input id="exampleLastName" class="form-control form-control-user" type="text" placeholder="Last Name" name="last-name" />
-    </div>
-  </div>
-  <div class="mb-3">
-    <input id="exampleInputEmail" class="form-control form-control-user" type="email" aria-describedby="emailHelp" placeholder="Email Address" name="email" />
-  </div>
-  <div class="mb-3">
-    <input id="exampleUsername" class="form-control form-control-user" type="text" placeholder="Username" name="username" />
-  </div>
-  <div class="row mb-3">
-    <div class="col-sm-6 mb-3 mb-sm-0">
-      <input id="examplePasswordInput" class="form-control form-control-user" type="password" placeholder="Password" name="password" />
-    </div>
-    <div class="col-sm-6">
-      <input id="exampleRepeatPasswordInput" class="form-control form-control-user" type="password" placeholder="Repeat Password" name="password_repeat" />
-    </div>
-  </div>
-  <button class="btn btn-primary d-block btn-user w-100" type="submit">Register Account</button>
-  <hr />
-  <hr />
+    <div class="mb-3"><input id="exampleInputEmail" class="form-control form-control form-control-user" type="email" aria-describedby="emailHelp" placeholder="Email Address" name="email" /></div>
+    <div class="mb-3"><input id="exampleUsername" class="form-control form-control form-control-user" type="text" placeholder="Username" name="username" /></div>
+    <div class="row mb-3">
+        <div class="col-sm-6 mb-3 mb-sm-0"><input id="examplePasswordInput" class="form-control form-control form-control-user" type="password" placeholder="Password" name="password" /></div>
+        <div class="col-sm-6"><input id="exampleRepeatPasswordInput" class="form-control form-control form-control-user" type="password" placeholder="Repeat Password" name="password_repeat" /></div>
+    </div><button class="btn btn-primary d-block btn-user w-100" type="submit">Register Account</button>
+    <hr /><button class="btn btn-primary d-block btn-google btn-user w-100 mb-2" role="button"><i class="fab fa-google"></i> Login with Google</button><button class="btn btn-primary d-block btn-facebook btn-user w-100" role="button"><i class="fab fa-facebook-f"></i> Login with Facebook</button>
+    <hr />
 </form><!-- End: Form -->
                             <!-- Start: Script --><script>
     const form = document.getElementById("signup-form");
@@ -116,7 +104,7 @@ form.addEventListener("submit", (event) => {
                 document.cookie = `account=${JSON.stringify(account.fields)}${expires}; path=/`;
                 alert("Sign up successful!");
                 form.reset();
-                window.location.href = "terminal/payment.html";
+                window.location.href = "app/dashboard.html";
               });
             } else {
               alert("An error occurred. Please try again later.");
