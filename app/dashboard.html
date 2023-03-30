@@ -46,7 +46,7 @@
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="table.html"><i class="fas fa-wallet"></i><span>Wallet</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="wallet.html"><i class="fas fa-wallet"></i><span>Wallet</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="table.html"><i class="fas fa-piggy-bank"></i><span>Deposit</span></a><a class="nav-link" href="table.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-cash-coin" style="width: 15.3px;margin: 0px 4px 0px 0px;">
                                 <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"></path>
                                 <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"></path>
@@ -101,6 +101,7 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
 
     return cookieValue ? JSON.parse(cookieValue) : null;
   }
+  console.log(getAccountFromCookie);
 
   // Set default image
   imgProfile.setAttribute('src', 'default-pfp.png');
@@ -436,7 +437,7 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
-    <p class="font-monospace" style="font-family: monospace!important;">DigiCash Banking System -v0.8.1</p>
+    <p class="font-monospace" style="font-family: monospace!important;">DigiCash Banking System - v0.8.1-Alpha-Preview-Beta</p>
     <script src="../assets/bootstrap/js/bootstrap.min.js?h=79ff9637b74326c362fb6f7f5801a7ba"></script>
     <script src="../assets/js/chart.min.js?h=bd9843d1866f45d1406a12f7de05f9ff"></script>
     <script src="../assets/js/bs-init.js?h=bd1e7bf16294cd29af0339e7c8132178"></script>
