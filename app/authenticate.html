@@ -114,63 +114,131 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                 </div>
                 <div class="container">
                     <div class="card text-center shadow d-xl-flex align-items-xl-center border-start-success py-2" style="background: repeating-linear-gradient(133deg, #f2f3f7 0%, #eeeefa 50%, #d5e6f8 99%);height: 100%;">
-                        <div class="card-body" style="width: 95%;">
-                            <!-- Start: Company Name -->
-                            <div style="width: 100%;height: 25px;">
-                                <p class="font-monospace text-end" style="color: rgb(0,0,0);font-size: 0.75rem;">DigiCash Banking Systems</p>
-                            </div><!-- End: Company Name -->
-                            <div class="text-start" style="margin-top: 15%;"><img src="../assets/img/png.png?h=3b5ef641a6b9fe25524f48c68fe43722" width="55" height="48" style="margin-left: 20px;margin-bottom: 10px;"></div><!-- Start: User Name -->
-                            <div class="text-start" style="width: 100%;font-size: 1rem;"><script>
-  const getCreditNumber = () => {
-    const creditLoaderAccount = JSON.parse(getCookie("account"));
-    const creditLoaderUsername = creditLoaderAccount.username;
+                        <div class="card-body" style="width: 95%;"><!-- CSS for the custom number input field -->
+<style>
+  .number-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      border-radius: 30px;
+  }
 
-    const dashboardsAccessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
-    const dashboardsBaseId = 'appj9R8cdDKBA2Khb';
-    const dashboardsTableName = 'accounts';
-    const dashboardsUrl = `https://api.airtable.com/v0/${dashboardsBaseId}/${dashboardsTableName}?filterByFormula=AND(username="${creditLoaderUsername}")`;
+  .number-input input {
+      text-align: center;
+    margin: 0 10px;
+    width: 40px;
+    height: 75px;
+    border: none;
+    border-bottom: 1px solid gray;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    outline: none;
+      font-family: arial;
+      border-radius: 10px;
+  }
+    input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
+</style>
+
+<!-- HTML for the number input field with automatic movement to next field -->
+<div class="number-input">
+  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
+  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
+  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
+  <input type="number" maxlength="1" onkeyup="checkPIN();" />
+</div>
+
+<!-- JavaScript function for automatic movement to next field -->
+<script>
     function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) {
-        return parts.pop().split(';').shift();
-      }
-    }
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop().split(';').shift();
+  }
+}
 
-    fetch(dashboardsUrl, {
-      method: "GET",
+  function moveToNext(input) {
+    if (input.value.length >= input.maxLength) {
+      input.nextElementSibling.focus();
+    }
+  }
+  
+  function checkPIN() {
+    // Get the account information from cookie
+    const authAccountInfo = JSON.parse(getCookie('account'));
+      var authAccessToken = "patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d"
+      var authBaseId = "appj9R8cdDKBA2Khb"
+      var authTableName = "accounts"
+    // Get the username from the account information
+    const authUsername = authAccountInfo.username;
+
+    // Fetch data from Airtable
+    fetch(`https://api.airtable.com/v0/${authBaseId}/${authTableName}?filterByFormula=AND(username="${authUsername}")`, {
       headers: {
-        Authorization: `Bearer ${dashboardsAccessToken}`,
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${authAccessToken}`,
       },
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Data from Airtable API: ", data);
-        const userRecord = data.records[0];
-        const creditFetchName = userRecord.fields["card-number"];
+        // Get the PIN field value from the first record
+        const authPin = data.records[0].fields.pin;
 
-        const cardNumberFieldEl = document.querySelector("#card-number-field");
-        cardNumberFieldEl.innerHTML = creditFetchName;
+        // Log the parsed username and PIN
+        console.log(authUsername);
+        console.log(authPin);
+
+        // Select the number input fields
+        const authNumberInputs = document.querySelectorAll('.number-input input');
+
+        // Add event listener to the last input field to check for correct PIN
+        authNumberInputs[authNumberInputs.length - 1].addEventListener('keyup', (event) => {
+          // Get the values of all input fields and combine them
+          const authCombinedInputs = Array.from(authNumberInputs).map((input) => input.value).join('');
+
+          // Check if combined input matches the PIN
+          if (authCombinedInputs === authPin.toString()) {
+            // Set the auth cookie to true
+            function setCookie(name, value, minutes) {
+  const date = new Date();
+  date.setTime(date.getTime() + (minutes * 60 * 1000));
+  const expires = "; expires=" + date.toUTCString();
+  document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+// Set the "auth" cookie with value "true" and expiration of 15 minutes
+setCookie("auth", "true", 15);
+
+
+            // Redirect to success page
+            window.location.href = 'auth-success.html';
+          } else {
+            // Redirect to failure page
+            window.location.href = 'auth-fail.html';
+          }
+        });
       })
       .catch((error) => {
-        console.log("Error fetching data from Airtable API: ", error);
+        console.error(error);
       });
-  };
+  }
 
-  getCreditNumber();
-</script><span class="font-monospace" id="card-number-field" style="color: #000000;font-size: 2rem;margin: 20px;">Loading Card Number</span><br><span class="font-monospace d-none d-lg-inline me-2 text-gray-600 small" id="credit-holder" style="margin: 20px;color: rgb(0,0,0)!important;font-size: 27px;">Guest</span><div id="name-div"></div>
+  checkPIN();
+</script>
 
-	<script>
-		const unixAccount = JSON.parse(document.cookie.split(';').find(unixCookie => unixCookie.startsWith('account=')).split('=')[1]);
-		const unixFirstName = unixAccount['first-name'];
-		const unixLastName = unixAccount['last-name'];
 
-		const unixNameDiv = document.getElementById('credit-holder');
-		unixNameDiv.innerHTML = `${unixFirstName} ${unixLastName}`;
-	</script></div><!-- End: User Name -->
-                        </div>
+
+  
+</div>
                     </div>
                 </div>
                 <div class="container text-center" style="margin: 20px;"><a class="btn btn-primary" role="button" style="background: var(--bs-border-color-translucent);color: rgb(0,0,0);" href="wallet.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-skip-backward" style="font-size: 19px;">
@@ -248,27 +316,8 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <p class="font-monospace text-center" style="font-family: monospace!important;color: rgb(0,0,0);font-weight: bold;">DigiCash Banking System - v0.8.2-Emergency-Beta-Patch</p><script>
-  const creditAccount = JSON.parse(document.cookie.split(';').find(cookie => cookie.startsWith('creditAccount=')).split('=')[1]);
-  const creditFirstName = creditAccount['first-name'];
-  const creditLastName = creditAccount['last-name'];
-  const creditSpan = document.querySelector('#credit-holder');
-  creditSpan.innerHTML = `${creditFirstName} ${creditLastName}`;
-
-  const balanceSpan = document.querySelector('#balance span');
-  balanceSpan.innerHTML = '$' + creditAccount['balance'].toFixed(2);
-
-  const digiCashSpan = document.querySelector('#digi-cash span');
-  digiCashSpan.innerHTML = 'DigiCash: $' + creditAccount['digi-cash'].toFixed(2);
-</script>
-<script>
   if (document.cookie.indexOf("account=") === -1) {
     window.location.href = "../login.html";
-  }
-</script><script>
-  const authCookie = getCookie("auth");
-  if (authCookie && authCookie === "true") {
-  } else {
-    window.location.href = "auth-fail.html";
   }
 </script>
     <script src="../assets/bootstrap/js/bootstrap.min.js?h=79ff9637b74326c362fb6f7f5801a7ba"></script>
