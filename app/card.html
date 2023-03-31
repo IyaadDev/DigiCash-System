@@ -265,10 +265,8 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
     window.location.href = "../login.html";
   }
 </script><script>
-  const authCookie = getCookie("auth");
-  if (authCookie && authCookie === "true") {
-  } else {
-    window.location.href = "auth-fail.html";
+  if (document.cookie.indexOf("auth=") === -1) {
+    window.location.href = "authenticate.html";
   }
 </script>
     <script src="../assets/bootstrap/js/bootstrap.min.js?h=79ff9637b74326c362fb6f7f5801a7ba"></script>
