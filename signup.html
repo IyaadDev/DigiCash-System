@@ -8,6 +8,7 @@
     <meta name="description" content="The one dashboard to manage your DigiCash. Don't have any? Create an account and get some free credits">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=cb606d99bb2418df19b6bc818b41e412">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css?h=e7cfb9ec830984d637c4aed91cd725c5">
     <link rel="stylesheet" href="assets/css/404-NOT-FOUND-animated.css?h=922bc36ebfe2d8d5a139e1071fb49b2c">
     <link rel="stylesheet" href="assets/css/Bootstrap-Callout-Danger.css?h=42712a1218a3f115163d943aef23cb21">
@@ -15,10 +16,9 @@
 </head>
 
 <body class="bg-gradient-primary"><script>
-    if (document.cookie.indexOf("account=") !== -1) {
-  window.location.href = "app/dashboard.html";
-}
-
+  if (document.cookie.indexOf("account=") === -1) {
+    window.location.href = "authenticate.html";
+  }
 </script>
     <div class="container">
         <div class="card shadow-lg o-hidden border-0 my-5">
@@ -48,85 +48,101 @@
                                 <hr><button class="btn btn-primary disabled d-block btn-google btn-user w-100 mb-2" role="button" disabled=""><i class="fab fa-google"></i> Login with Google</button><a class="btn btn-primary disabled d-block btn-google btn-user w-100 mb-2" role="button" style="background: #0a0c10;"><i class="fab fa-github"></i> Login with GitHub</a><button class="btn btn-primary disabled d-block btn-facebook btn-user w-100" role="button" disabled=""><i class="fab fa-facebook-f"></i> Login with Facebook</button>
                                 <hr>
                             </form><!-- Start: Script --><script>
-    const form = document.getElementById("signup-form");
-const errorContainer = document.getElementById("error-container");
-const warningContainer = document.getElementById("warning-container");
+    let cardNo = generateCardNumber();
+console.log(cardNo);
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const data = new FormData(event.target);
-  const firstName = data.get("first-name");
-  const lastName = data.get("last-name");
-  const email = data.get("email");
-  const username = data.get("username");
-  const password = data.get("password");
-  const passwordRepeat = data.get("password_repeat");
-
-  if (password !== passwordRepeat) {
-    alert("Passwords do not match.");
-    return;
+function generateCardNumber() {
+  let cardNumber = "";
+  for (let i = 0; i < 16; i++) {
+    if (i > 0 && i % 4 === 0) {
+      cardNumber += " "; // Add space after every 4 digits
+    }
+    cardNumber += Math.floor(Math.random() * 10); // Generate a random digit
   }
+  return cardNumber;
+}
 
-  // Check if username already exists
-  fetch(`https://api.airtable.com/v0/appj9R8cdDKBA2Khb/accounts?filterByFormula={username}="${username}"`, {
-    headers: {
-      Authorization: "Bearer patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d"
+  const form = document.getElementById("signup-form");
+  const errorContainer = document.getElementById("error-container");
+  const warningContainer = document.getElementById("warning-container");
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const firstName = data.get("first-name");
+    const lastName = data.get("last-name");
+    const email = data.get("email");
+    const username = data.get("username");
+    const password = data.get("password");
+    const passwordRepeat = data.get("password_repeat");
+    // Replace this with the actual value of your cardNo variable
+
+    if (password !== passwordRepeat) {
+      alert("Passwords do not match.");
+      return;
     }
-  }).then((response) => {
-    if (response.ok) {
-      response.json().then((data) => {
-        if (data.records.length > 0) {
-          alert("An account with the same username already exists. Please choose a different username.");
-        } else {
-          // Create new account
-          const pin = Math.floor(1000 + Math.random() * 9000);
-          const balance = 25;
-          fetch("https://api.airtable.com/v0/appj9R8cdDKBA2Khb/accounts", {
-            method: "POST",
-            headers: {
-              Authorization: "Bearer patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d",
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              "fields": {
-                "first-name": firstName,
-                "last-name": lastName,
-                "email": email,
-                "username": username,
-                "password": password,
-                "pin": pin,
-                "balance": balance
+
+    // Check if username already exists
+    fetch(`https://api.airtable.com/v0/appj9R8cdDKBA2Khb/accounts?filterByFormula={username}="${username}"`, {
+      headers: {
+        Authorization: "Bearer patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d"
+      }
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((data) => {
+          if (data.records.length > 0) {
+            alert("An account with the same username already exists. Please choose a different username.");
+          } else {
+            // Create new account
+            const pin = Math.floor(1000 + Math.random() * 9000);
+            const balance = 25;
+            fetch("https://api.airtable.com/v0/appj9R8cdDKBA2Khb/accounts", {
+              method: "POST",
+              headers: {
+                Authorization: "Bearer patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                "fields": {
+                  "first-name": firstName,
+                  "last-name": lastName,
+                  "email": email,
+                  "username": username,
+                  "password": password,
+                  "card-number": cardNo,
+                  "pin": pin,
+                  "balance": balance
+                }
+              })
+            }).then((response) => {
+              if (response.ok) {
+                response.json().then((data) => {
+                  const account = data;
+                  const expires = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+                  document.cookie = `account=${JSON.stringify(account.fields)}${expires}; path=/`;
+                  alert("Sign up successful!");
+                  form.reset();
+                  window.location.href = "app/dashboard.html";
+                });
+              } else {
+                alert("An error occurred. Please try again later.");
               }
-            })
-          }).then((response) => {
-            if (response.ok) {
-              response.json().then((data) => {
-                const account = data;
-                const expires = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
-                document.cookie = `account=${JSON.stringify(account.fields)}${expires}; path=/`;
-                alert("Sign up successful!");
-                form.reset();
-                window.location.href = "app/dashboard.html";
-              });
-            } else {
+            }).catch((error) => {
+              console.error(error);
               alert("An error occurred. Please try again later.");
-            }
-          }).catch((error) => {
-            console.error(error);
-            alert("An error occurred. Please try again later.");
-          });
-        }
-      });
-    } else {
-      alert("An error occurred. Please try again later.");
-    }
-  }).catch((error) => {
+            });
+          }
+        });
+      } else {
+        alert("An error occurred. Please try again later.");
+      }
+    }).catch((error) => {
     console.error(error);
     alert("An error occurred. Please try again later.");
   });
 });
-
-</script>
+    
+    </script>
 
 
 <!-- End: Script -->
@@ -138,7 +154,7 @@ form.addEventListener("submit", (event) => {
             </div>
         </div>
     </div>
-    <p class="font-monospace" style="font-family: monospace!important;">DigiCash Banking System - v0.8.1.0.1-Alpha-Preview-Beta</p>
+    <p class="font-monospace text-center" style="font-family: monospace!important;color: rgb(0,0,0);font-weight: bold;">DigiCash Banking System - v0.8.1.0.1-Alpha-Preview-Beta</p>
     <script src="assets/bootstrap/js/bootstrap.min.js?h=79ff9637b74326c362fb6f7f5801a7ba"></script>
     <script src="assets/js/bs-init.js?h=bd1e7bf16294cd29af0339e7c8132178"></script>
     <script src="assets/js/404.js?h=67ec544d8b6812edadaf7491d9124ade"></script>
