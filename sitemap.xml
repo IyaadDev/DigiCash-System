@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://beta.digicash.cf/app/authenticate.html</loc>
+        <loc>https://dashboard.digicash.cf/app/authenticate.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/app/card.html</loc>
+        <loc>https://dashboard.digicash.cf/app/card.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/app/dashboard.html</loc>
+        <loc>https://dashboard.digicash.cf/app/dashboard.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/app/</loc>
+        <loc>https://dashboard.digicash.cf/app/</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/app/profile.html</loc>
+        <loc>https://dashboard.digicash.cf/app/profile.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/app/transfer.html</loc>
+        <loc>https://dashboard.digicash.cf/app/transfer.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/app/wallet.html</loc>
+        <loc>https://dashboard.digicash.cf/app/wallet.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/privacy/</loc>
+        <loc>https://dashboard.digicash.cf/privacy/</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/support/forgot.html</loc>
+        <loc>https://dashboard.digicash.cf/support/forgot.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/tac/</loc>
+        <loc>https://dashboard.digicash.cf/tac/</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/terminal/payment.html</loc>
+        <loc>https://dashboard.digicash.cf/terminal/payment.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/terminal/terminal-nli.html</loc>
+        <loc>https://dashboard.digicash.cf/terminal/terminal-nli.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/terms/</loc>
+        <loc>https://dashboard.digicash.cf/terms/</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/404.html</loc>
+        <loc>https://dashboard.digicash.cf/404.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/about.html</loc>
+        <loc>https://dashboard.digicash.cf/about.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/account-reclamation.html</loc>
+        <loc>https://dashboard.digicash.cf/account-reclamation.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/dashboard.html</loc>
+        <loc>https://dashboard.digicash.cf/dashboard.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/forgot-password.html</loc>
+        <loc>https://dashboard.digicash.cf/forgot-password.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/forgot-password-why.html</loc>
+        <loc>https://dashboard.digicash.cf/forgot-password-why.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/github-auth.html</loc>
+        <loc>https://dashboard.digicash.cf/github-auth.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/</loc>
+        <loc>https://dashboard.digicash.cf/</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/index-logged-in.html</loc>
+        <loc>https://dashboard.digicash.cf/index-logged-in.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/login.html</loc>
+        <loc>https://dashboard.digicash.cf/login.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/logo.html</loc>
+        <loc>https://dashboard.digicash.cf/logo.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/logout.html</loc>
+        <loc>https://dashboard.digicash.cf/logout.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/profile.html</loc>
+        <loc>https://dashboard.digicash.cf/profile.html</loc>
     </url>
     <url>
-        <loc>https://beta.digicash.cf/signup.html</loc>
+        <loc>https://dashboard.digicash.cf/signup.html</loc>
     </url>
 </urlset>
