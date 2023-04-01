@@ -1,2 +1,2 @@
-# DigiCash-Dashboard-Beta
-Beta Edition of DigiCash Dashboard
+# DigiCash-System
+Student Banking System
