@@ -65,7 +65,7 @@
             </div>
         </nav>
         <div class="d-flex flex-column" id="content-wrapper" style="margin-top: 20px;border-radius: 10px;background: #eaf1f4;margin-right: 20px;border-style: solid;border-color: rgb(242,242,242);">
-            <div id="content">
+            <div class="text-center" id="content">
                 <div class="container-fluid" style="padding: 25px;">
                     <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="border-radius: 10px;">
                         <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
@@ -122,6 +122,11 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                     </svg></div>
                 <h1 class="text-center" style="color: rgb(0,0,0);font-weight: bold;">Access to wallet has been denied</h1>
                 <p class="text-center" style="color: rgb(0,0,0);">Invalid PIN! Make sure you're using the right one!</p>
+                <div class="btn-group" role="group"><a class="btn btn-primary d-xl-flex align-items-xl-center" role="button" href="/app/authenticate.html" style="background: #009e49;color: rgb(0,0,0);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-reply-fill" style="font-size: 20px;">
+                            <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"></path>
+                        </svg>&nbsp;Try Again</a><button class="btn btn-primary d-xl-flex align-items-xl-center" type="button" style="color: rgb(0,0,0);background: #75b2dd;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-question-lg" style="font-size: 20px;">
+                            <path fill-rule="evenodd" d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14Z"></path>
+                        </svg>&nbsp;Forgot PIN</button></div>
             </div>
             <footer class="bg-white sticky-footer" style="background: transparent;">
                 <div class="container my-auto">
