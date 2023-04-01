@@ -49,6 +49,9 @@
         <loc>https://dashboard.digicash.cf/account-reclamation.html</loc>
     </url>
     <url>
+        <loc>https://dashboard.digicash.cf/account-recovery.html</loc>
+    </url>
+    <url>
         <loc>https://dashboard.digicash.cf/dashboard.html</loc>
     </url>
     <url>
@@ -77,6 +80,9 @@
     </url>
     <url>
         <loc>https://dashboard.digicash.cf/profile.html</loc>
+    </url>
+    <url>
+        <loc>https://dashboard.digicash.cf/recover-success.html</loc>
     </url>
     <url>
         <loc>https://dashboard.digicash.cf/signup.html</loc>
