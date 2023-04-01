@@ -21,10 +21,9 @@
 </head>
 
 <body class="bg-gradient-primary"><script>
-    if (document.cookie.indexOf("account=") !== -1) {
-  window.location.href = "/app/dashboard.html";
-}
-
+  if (document.cookie.indexOf("account=") === -1) {
+    window.location.href = "/app/dashboard.html";
+  }
 </script>
     <div class="container">
         <div class="card shadow-lg o-hidden border-0 my-5">
@@ -43,7 +42,7 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control form-control form-control form-control-user" type="text" id="exampleFirstName" placeholder="First Name" name="first-name" required=""></div>
                                     <div class="col-sm-6"><input class="form-control form-control form-control form-control form-control-user" type="text" id="exampleLastName" placeholder="Last Name" name="last-name" required=""></div>
                                 </div>
-                                <div class="mb-3"><input class="form-control form-control form-control form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email" required="" inputmode="email"></div>
+                                <div class="mb-3"><input class="form-control form-control form-control form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email" required=""></div>
                                 <div class="mb-3"><input class="form-control form-control form-control form-control form-control-user" type="text" id="exampleUsername" placeholder="Username" name="username" required=""></div>
                                 <div class="row mb-3">
                                     <div class="col-sm-6 mb-3 mb-sm-0"><input class="form-control form-control form-control form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password" required=""></div>
@@ -102,28 +101,7 @@ function generateCardNumber() {
             // Create new account
             const pin = Math.floor(1000 + Math.random() * 9000);
             const balance = 25;
-              
-           fetch('https://cors-anywhere.herokuapp.com/https://hooks.airtable.com/workflows/v1/genericWebhook/appj9R8cdDKBA2Khb/wflLbFCKs9D8hnhWV/wtrm3SajmX1dwkNrE', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    // Add your data here
-    "first-name": firstName,
-                  "last-name": lastName,
-                  "email": email,
-                  "username": username,
-                  "password": password,
-                  "card-number": cardNo,
-                  "pin": pin,
-                  "balance": balance
-  })
-})
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error(error));
- fetch("https://api.airtable.com/v0/appj9R8cdDKBA2Khb/accounts", {
+            fetch("https://api.airtable.com/v0/appj9R8cdDKBA2Khb/accounts", {
               method: "POST",
               headers: {
                 Authorization: "Bearer patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d",
