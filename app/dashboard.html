@@ -230,7 +230,7 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
         console.log("Data from Airtable API: ", data);
         const userRecord = data.records[0];
         const userBalance = userRecord.fields.balance;
-        const formattedBalance = userBalance.toLocaleString("en-US", {
+       const formattedBalance = userBalance.toLocaleString("en-US", {
           style: "currency",
           currency: "USD",
         });
