@@ -1,5 +1,5 @@
 # DigiCash-System
-Student Banking System
+Banking system for students
 
 ## Introduction
 DigiCash is a digital currency managed by iCorp that offers an innovative alternative to the traditional UAE dirham for student financials. Unlike traditional currency, DigiCash operates entirely online and is designed to provide a more convenient way for students to manage their finances. The currency utilizes cutting-edge technology to ensure the safety of all transactions, and its digital nature means that it is not subject to the same limitations as traditional currency. By using DigiCash, students can enjoy faster, more convenient transactions, while also benefiting from increased convenience. Overall, DigiCash represents a promising new frontier in the world of digital currency and has the potential to revolutionize the way we think about managing our finances.
