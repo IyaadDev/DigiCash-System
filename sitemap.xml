@@ -22,6 +22,9 @@
         <loc>https://dashboard.digicash.cf/app/wallet.html</loc>
     </url>
     <url>
+        <loc>https://dashboard.digicash.cf/beta/</loc>
+    </url>
+    <url>
         <loc>https://dashboard.digicash.cf/privacy/</loc>
     </url>
     <url>
