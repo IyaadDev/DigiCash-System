@@ -53,7 +53,7 @@
                     <li class="nav-item"><a class="nav-link" href="/app/dashboard.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/app/profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="/app/wallet.html"><i class="fas fa-wallet"></i><span>Wallet</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/app/deposit-authenticate.html"><i class="fas fa-piggy-bank"></i><span>Deposit</span></a><a class="nav-link" href="/app/table.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-cash-coin" style="width: 15.3px;margin: 0px 4px 0px 0px;">
+                    <li class="nav-item"><a class="nav-link" href="/app/deposit.html"><i class="fas fa-piggy-bank"></i><span>Deposit</span></a><a class="nav-link" href="/app/table.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-cash-coin" style="width: 15.3px;margin: 0px 4px 0px 0px;">
                                 <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"></path>
                                 <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"></path>
                                 <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"></path>
@@ -253,14 +253,14 @@ input[type=number] {
 }
 
 // Set the "auth" cookie with value "true" and expiration of 15 minutes
-setCookie("deposit", "true", 15);
+setCookie("auth", "true", 15);
 
 
             // Redirect to success page
-            window.location.href = 'deposit.html';
+            window.location.href = 'deposit-auth-success.html';
           } else {
             // Redirect to failure page
-            window.location.href = 'auth-fail.html';
+            window.location.href = 'depopsit-auth-fail.html';
           }
         });
       })
@@ -283,67 +283,55 @@ setCookie("deposit", "true", 15);
                             <path d="M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z"></path>
                         </svg>&nbsp;Go back</a></div><!-- Start: Balance container -->
                 <div class="col text-center d-flex d-xl-flex justify-content-center justify-content-xl-end">
-                    <!-- Start: Balance -->
-                    <div style="margin: 20px;background: #ffffff;border-radius: 7px;width: 346.05px;">
-                        <!-- Start: Balance container -->
-                        <div class="text-uppercase fw-bold text-success text-xs mb-1"></div><!-- End: Balance container -->
-                        <div class="fw-bold text-dark h5 mb-0" id="balance" style="color: rgb(0,0,0);font-size: 31px;"><span style="font-size: 1.50rem;">Loading...</span></div>
-                        <div class="fw-bold text-success text-xs mb-1" id="digi-cash" style="font-size: 1rem;"><span style="font-size: 1rem;">Connecting to financial system...</span></div><script>
-    const getBalance = () => {
-    const cookieData = getCookie("account");
-    if (!cookieData) {
+                    <!-- Start: PIN -->
+                    <div style="margin: 20px;background: #ffffff;border-radius: 7px;width: 346.05px;"><div id="pin1" class="fw-bold text-dark h5 mb-0" style="color: rgb(0,0,0);font-size: 31px;"><span style="font-size: 1.50rem;">Loading...</span></div>
+<script>
+    const getBalance1 = () => {
+    const cookieData1 = getCookie1("account");
+    if (!cookieData1) {
       console.log("No user data found in cookie.");
       return;
     }
-    const username = JSON.parse(cookieData).username;
-  const dashboardsAccessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
-  const dashboardsBaseId = 'appj9R8cdDKBA2Khb';
-  const dashboardsTableName = 'accounts';
-  const dashboardsUrl = `https://api.airtable.com/v0/${dashboardsBaseId}/${dashboardsTableName}?filterByFormula=AND(username="${username}")`;
+    const username1 = JSON.parse(cookieData1).username;
+  const dashboardsAccessToken1 = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
+  const dashboardsBaseId1 = 'appj9R8cdDKBA2Khb';
+  const dashboardsTableName1 = 'accounts';
+  const dashboardsUrl1 = `https://api.airtable.com/v0/${dashboardsBaseId1}/${dashboardsTableName1}?filterByFormula=AND(username="${username1}")`;
 
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) {
-      return parts.pop().split(';').shift();
+  function getCookie1(name) {
+    const value1 = `; ${document.cookie}`;
+    const parts1 = value1.split(`; ${name}=`);
+    if (parts1.length === 2) {
+      return parts1.pop().split(';').shift();
     }
   }
 
-  
-    
+    const pinEl = document.querySelector("#pin1 span");
 
-    const balanceEl = document.querySelector("#balance span");
-    const digiCashEl = document.querySelector("#digi-cash span");
-
-    fetch(dashboardsUrl, {
+    fetch(dashboardsUrl1, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${dashboardsAccessToken}`,
+        Authorization: `Bearer ${dashboardsAccessToken1}`,
         "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Data from Airtable API: ", data);
-        const userRecord = data.records[0];
-        const userBalance = userRecord.fields.balance;
-        const formattedBalance = userBalance.toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-        });
-        balanceEl.innerHTML = formattedBalance.match(/[\d\.]+/)[0];
-        digiCashEl.innerHTML = "DigiCash";
+        const userRecord1 = data.records[0];
+        const userPin1 = userRecord1.fields.pin;
+        pinEl.innerHTML = userPin1;
       })
       .catch((error) => {
         console.log("Error fetching data from Airtable API: ", error);
-        balanceEl.innerHTML = "Error fetching balance";
+        pinEl.innerHTML = "Error fetching pin";
       });
   };
 
-  getBalance();
+  getBalance1();
 </script>
 
-                    </div><!-- End: Balance -->
+</div><!-- End: PIN -->
                 </div><!-- End: Balance container -->
             </div>
             <footer class="bg-white sticky-footer" style="background: transparent;">
