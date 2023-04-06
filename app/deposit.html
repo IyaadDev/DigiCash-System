@@ -117,167 +117,41 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                                 </li>
                             </ul>
                         </div>
-                    </nav>
+                    </nav><!-- Start: Bootstrap Callout Info -->
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Info </h4>
+                        <p>We're in the progress of building a deposit system directly on the DigiCash System.</p>
+                    </div><!-- End: Bootstrap Callout Info -->
                 </div>
                 <div class="container">
                     <div class="card text-center shadow d-xl-flex align-items-xl-center border-start-success py-2" style="background: repeating-linear-gradient(133deg, #f2f3f7 0%, #eeeefa 50%, #d5e6f8 99%);height: 100%;">
                         <div class="card-body" style="width: 95%;"><script>
-    const accountCookie = document.cookie.split(';')
-  .find(cookie => cookie.trim().startsWith('account='));
+    const depositAccessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
+const depositBaseId = 'appj9R8cdDKBA2Khb';
+const depositTableName = 'accountants';
+const depositUrl = `https://api.airtable.com/v0/${depositBaseId}/${depositTableName}`;
 
-if (accountCookie) {
-  const cookieValues = accountCookie.split('=')[1];
-  const { username, password, pin } = JSON.parse(decodeURIComponent(cookieValues));
-  console.log(username, password, pin);
-
-  // Now you can use these values to send a request to the webhook
-  const corsProxyUrl = 'https://corsproxy.io/?';
-  const webhookUrl = 'https://hooks.airtable.com/workflows/v1/genericWebhook/appj9R8cdDKBA2Khb/wfl8yJ5A1JLObHaYH/wtrX59fJ1NOOhYeaG';
-  const url = corsProxyUrl + encodeURIComponent(webhookUrl);
-
-  // Use fetch to send the request to the webhook
-  fetch(url, {
-    method: 'POST',
-    body: JSON.stringify({
-      username,
-      password,
-      pin
-    })
+fetch(depositUrl, {
+  method: "GET",
+  headers: {
+    Authorization: `Bearer ${depositAccessToken}`,
+    "Content-Type": "application/json",
+  },
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Data from Airtable API: ", data);
+    const nameRecords = data.records.filter(record => record.fields.name);
+    const randomNameRecord = nameRecords[Math.floor(Math.random() * nameRecords.length)];
+    console.log("Random name record: ", randomNameRecord.fields.name);
   })
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.log(error));
-} else {
-  console.log('Account cookie not found');
-}
+  .catch((error) => {
+    console.log("Error fetching data from Airtable API: ", error);
+  });
 
 </script>
-                            <h1 style="color: rgb(0,0,0);">Enter an&nbsp;<strong>amount </strong>to deposit</h1>
-                            <p style="color: rgb(0,0,0);">When you originally got your account, you may have got an email</p><!-- CSS for the custom number input field -->
-<style>
-  .number-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-      border-radius: 30px;
-  }
-
-  .number-input input {
-      text-align: center;
-    margin: 0 10px;
-    width: 40px;
-    height: 75px;
-    border: none;
-    border-bottom: 1px solid gray;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 5px;
-    outline: none;
-      font-family: arial;
-      border-radius: 10px;
-  }
-    input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-</style>
-
-<!-- HTML for the number input field with automatic movement to next field -->
-<div class="number-input">
-  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
-  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
-  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
-  <input type="number" maxlength="1" onkeyup="checkPIN();" />
-</div>
-
-<!-- JavaScript function for automatic movement to next field -->
-<script>
-    function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) {
-    return parts.pop().split(';').shift();
-  }
-}
-
-  function moveToNext(input) {
-    if (input.value.length >= input.maxLength) {
-      input.nextElementSibling.focus();
-    }
-  }
-  
-  function checkPIN() {
-    // Get the account information from cookie
-    const authAccountInfo = JSON.parse(getCookie('account'));
-      var authAccessToken = "patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d"
-      var authBaseId = "appj9R8cdDKBA2Khb"
-      var authTableName = "accounts"
-    // Get the username from the account information
-    const authUsername = authAccountInfo.username;
-
-    // Fetch data from Airtable
-    fetch(`https://api.airtable.com/v0/${authBaseId}/${authTableName}?filterByFormula=AND(username="${authUsername}")`, {
-      headers: {
-        Authorization: `Bearer ${authAccessToken}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Get the PIN field value from the first record
-        const authPin = data.records[0].fields.pin;
-
-        // Log the parsed username and PIN
-        console.log(authUsername);
-        console.log(authPin);
-
-        // Select the number input fields
-        const authNumberInputs = document.querySelectorAll('.number-input input');
-
-        // Add event listener to the last input field to check for correct PIN
-        authNumberInputs[authNumberInputs.length - 1].addEventListener('keyup', (event) => {
-          // Get the values of all input fields and combine them
-          const authCombinedInputs = Array.from(authNumberInputs).map((input) => input.value).join('');
-
-          // Check if combined input matches the PIN
-          if (authCombinedInputs === authPin.toString()) {
-            // Set the auth cookie to true
-            function setCookie(name, value, minutes) {
-  const date = new Date();
-  date.setTime(date.getTime() + (minutes * 60 * 1000));
-  const expires = "; expires=" + date.toUTCString();
-  document.cookie = name + "=" + value + expires + "; path=/";
-}
-
-// Set the "auth" cookie with value "true" and expiration of 15 minutes
-setCookie("auth", "true", 15);
-
-
-            // Redirect to success page
-            window.location.href = 'deposit-auth-success.html';
-          } else {
-            // Redirect to failure page
-            window.location.href = 'depopsit-auth-fail.html';
-          }
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  checkPIN();
-</script>
-
-
-
-  
-
+                            <h1 style="color: rgb(0,0,0);">Deposit agents</h1>
+                            <p style="color: rgb(0,0,0);">Meet up with a deposit agent to deposit funds</p><iframe class="airtable-embed" src="https://airtable.com/embed/shrmCtBhrB6mZyneC?backgroundColor=red&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent;border: 1px solid #ccc;"></iframe>
                         </div>
                     </div>
                 </div>

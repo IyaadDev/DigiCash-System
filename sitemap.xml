@@ -25,6 +25,9 @@
         <loc>https://dashboard.digicash.cf/app/wallet.html</loc>
     </url>
     <url>
+        <loc>https://dashboard.digicash.cf/app/withdraw.html</loc>
+    </url>
+    <url>
         <loc>https://dashboard.digicash.cf/beta/</loc>
     </url>
     <url>
