@@ -168,3 +168,6 @@ img {
   box-sizing: border-box;
 }
 
+.services .icon-box:hover .title a, .services .icon-box:hover .description {
+}
+
