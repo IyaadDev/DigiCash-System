@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Wallet - DigiCash Dashboard</title>
+    <title>Card - Credit Card - DigiCash Dashboard</title>
     <meta name="description" content="The one dashboard to manage your DigiCash. Don't have any? Create an account and get some free credits">
     <link rel="icon" type="image/png" sizes="500x500" href="../assets/img/icon.png?h=65db8f52059975fa40b00e7f7accfb7e">
     <link rel="icon" type="image/png" sizes="500x500" href="../assets/img/icon.png?h=65db8f52059975fa40b00e7f7accfb7e">
@@ -74,7 +74,7 @@
                 <div class="container-fluid" style="padding: 25px;">
                     <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="border-radius: 10px;">
                         <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                            <h3 class="text-dark mb-0" style="font-size: 1rem;">DigiCash Wallet</h3>
+                            <h3 class="text-dark mb-0" style="font-size: 1rem;">DigiCash Banking System</h3>
                             <ul class="navbar-nav flex-nowrap ms-auto">
                                 <li class="nav-item dropdown no-arrow">
                                     <!-- Start: account thign -->
@@ -120,102 +120,98 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                                 </li>
                             </ul>
                         </div>
-                    </nav><!-- Start: Bootstrap Callout Danger -->
-                    <div class="bs-callout bs-callout-danger">
-                        <h4>Transfer not available yet!</h4>
-                        <p>We're supporting transfers soon. If you really need to transfer, meet up with an agent that supports a withdraw/deposit.</p>
-                    </div><!-- End: Bootstrap Callout Danger -->
-                    <!-- Start: Bootstrap Callout Danger -->
-                    <div class="bs-callout bs-callout-danger">
-                        <h4>Full functionality not available</h4>
-                        <p>Deposit, transfer and withdraw are not yet available, to file a deposit, withdraw or transfer, please consult an iCorp Accountant</p>
-                    </div><!-- End: Bootstrap Callout Danger -->
+                    </nav><!-- Start: Bootstrap Callout Info -->
+                    <div class="bs-callout bs-callout-info">
+                        <h4>Info </h4>
+                        <p>We're still building a withdraw system directly on DigiCash.</p>
+                    </div><!-- End: Bootstrap Callout Info -->
                 </div>
                 <div class="container">
-                    <div class="card text-center shadow d-xl-flex align-items-xl-center border-start-success py-2" style="background: repeating-linear-gradient(133deg, #f2f3f7 0%, #eeeefa 50%, #d5e6f8 99%);">
-                        <div class="card-body">
-                            <div class="col-auto"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-piggy-bank" style="font-size: 90px;color: rgb(0,0,0);">
-                                    <path d="M5 6.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm1.138-1.496A6.613 6.613 0 0 1 7.964 4.5c.666 0 1.303.097 1.893.273a.5.5 0 0 0 .286-.958A7.602 7.602 0 0 0 7.964 3.5c-.734 0-1.441.103-2.102.292a.5.5 0 1 0 .276.962z"></path>
-                                    <path fill-rule="evenodd" d="M7.964 1.527c-2.977 0-5.571 1.704-6.32 4.125h-.55A1 1 0 0 0 .11 6.824l.254 1.46a1.5 1.5 0 0 0 1.478 1.243h.263c.3.513.688.978 1.145 1.382l-.729 2.477a.5.5 0 0 0 .48.641h2a.5.5 0 0 0 .471-.332l.482-1.351c.635.173 1.31.267 2.011.267.707 0 1.388-.095 2.028-.272l.543 1.372a.5.5 0 0 0 .465.316h2a.5.5 0 0 0 .478-.645l-.761-2.506C13.81 9.895 14.5 8.559 14.5 7.069c0-.145-.007-.29-.02-.431.261-.11.508-.266.705-.444.315.306.815.306.815-.417 0 .223-.5.223-.461-.026a.95.95 0 0 0 .09-.255.7.7 0 0 0-.202-.645.58.58 0 0 0-.707-.098.735.735 0 0 0-.375.562c-.024.243.082.48.32.654a2.112 2.112 0 0 1-.259.153c-.534-2.664-3.284-4.595-6.442-4.595zM2.516 6.26c.455-2.066 2.667-3.733 5.448-3.733 3.146 0 5.536 2.114 5.536 4.542 0 1.254-.624 2.41-1.67 3.248a.5.5 0 0 0-.165.535l.66 2.175h-.985l-.59-1.487a.5.5 0 0 0-.629-.288c-.661.23-1.39.359-2.157.359a6.558 6.558 0 0 1-2.157-.359.5.5 0 0 0-.635.304l-.525 1.471h-.979l.633-2.15a.5.5 0 0 0-.17-.534 4.649 4.649 0 0 1-1.284-1.541.5.5 0 0 0-.446-.275h-.56a.5.5 0 0 1-.492-.414l-.254-1.46h.933a.5.5 0 0 0 .488-.393zm12.621-.857a.565.565 0 0 1-.098.21.704.704 0 0 1-.044-.025c-.146-.09-.157-.175-.152-.223a.236.236 0 0 1 .117-.173c.049-.027.08-.021.113.012a.202.202 0 0 1 .064.199z"></path>
-                                </svg></div>
-                            <div class="row align-items-center no-gutters">
-                                <div class="col me-2">
-                                    <div class="text-uppercase fw-bold text-success text-xs mb-1"><span class="text-capitalize" style="font-size: 1.5rem;">DigiCash Balance</span></div>
-                                    <div class="fw-bold text-dark h5 mb-0" id="balance" style="color: rgb(0,0,0);font-size: 31px;"><span></span></div>
-                                    <div class="fw-bold text-success text-xs mb-1" id="digi-cash" style="font-size: 1rem;"><span></span></div>
-                                </div>
-                            </div><a class="btn btn-primary" role="button" style="margin: 6px;padding: 5px 12px;border-radius: 5px;" href="deposit.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-cash-coin" style="font-size: 30px;">
-                                    <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"></path>
-                                    <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"></path>
-                                    <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1H1z"></path>
-                                    <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"></path>
-                                </svg>&nbsp;Deposit<br></a><button class="btn btn-primary" type="button" style="margin: 6px;padding: 5px 12px;border-radius: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-send-fill" style="font-size: 30px;">
-                                    <path fill-rule="evenodd" d="M15.964.686a.5.5 0 0 0-.65-.65l-.095.038L.767 5.854l-.001.001-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.563 2.903.432.275.275.432 2.903 4.563.002.002.26.41a.5.5 0 0 0 .886-.083l.181-.453L15.926.78l.038-.095Zm-1.833 1.89.471-1.178-1.178.471L5.93 9.363l.338.215a.5.5 0 0 1 .154.154l.215.338 7.494-7.494Z"></path>
-                                </svg>&nbsp; Transfer<br></button><button class="btn btn-primary" type="button" style="margin: 6px;padding: 5px 12px;border-radius: 5px;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-cash" style="font-size: 30px;">
-                                    <path d="M8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
-                                    <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z"></path>
-                                </svg>&nbsp;Withdraw<br></button>
-                            <div><a class="btn btn-primary" role="button" style="margin: 6px;padding: 5px 12px;border-radius: 5px;background: var(--bs-border-color-translucent);color: rgb(0,0,0);border: 0.5px solid rgb(0,0,0);" href="card.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-credit-card-2-front-fill" style="font-size: 30px;">
-                                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2zm0 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm3 0a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"></path>
-                                    </svg>&nbsp;View my card<br></a></div>
+                    <div class="card text-center shadow d-xl-flex align-items-xl-center border-start-success py-2" style="background: repeating-linear-gradient(133deg, #f2f3f7 0%, #eeeefa 50%, #d5e6f8 99%);height: 100%;">
+                        <div class="card-body" style="width: 95%;"><script>
+    const depositAccessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
+const depositBaseId = 'appj9R8cdDKBA2Khb';
+const depositTableName = 'accountants';
+const depositUrl = `https://api.airtable.com/v0/${depositBaseId}/${depositTableName}`;
+
+fetch(depositUrl, {
+  method: "GET",
+  headers: {
+    Authorization: `Bearer ${depositAccessToken}`,
+    "Content-Type": "application/json",
+  },
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Data from Airtable API: ", data);
+    const nameRecords = data.records.filter(record => record.fields.name);
+    const randomNameRecord = nameRecords[Math.floor(Math.random() * nameRecords.length)];
+    console.log("Random name record: ", randomNameRecord.fields.name);
+  })
+  .catch((error) => {
+    console.log("Error fetching data from Airtable API: ", error);
+  });
+
+</script>
+                            <h1 style="color: rgb(0,0,0);">Withdraw agents</h1>
+                            <p style="color: rgb(0,0,0);">Meet up with a withdraw agent to collect funds</p><iframe class="airtable-embed" src="https://airtable.com/embed/shrmCtBhrB6mZyneC?backgroundColor=red&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent;border: 1px solid #ccc;"></iframe>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-xl-3 mb-4"><script>
-    const getBalance = () => {
-    const cookieData = getCookie("account");
-    if (!cookieData) {
+                <div class="container text-center" style="margin: 20px;"><a class="btn btn-primary" role="button" style="background: var(--bs-border-color-translucent);color: rgb(0,0,0);" href="wallet.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-skip-backward" style="font-size: 19px;">
+                            <path d="M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z"></path>
+                        </svg>&nbsp;Go back</a></div><!-- Start: Balance container -->
+                <div class="col text-center d-flex d-xl-flex justify-content-center justify-content-xl-end">
+                    <!-- Start: PIN -->
+                    <div style="margin: 20px;background: #ffffff;border-radius: 7px;width: 346.05px;"><div id="pin1" class="fw-bold text-dark h5 mb-0" style="color: rgb(0,0,0);font-size: 31px;"><span style="font-size: 1.50rem;">Loading...</span></div>
+<script>
+    const getBalance1 = () => {
+    const cookieData1 = getCookie1("account");
+    if (!cookieData1) {
       console.log("No user data found in cookie.");
       return;
     }
-    const username = JSON.parse(cookieData).username;
-  const dashboardsAccessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
-  const dashboardsBaseId = 'appj9R8cdDKBA2Khb';
-  const dashboardsTableName = 'accounts';
-  const dashboardsUrl = `https://api.airtable.com/v0/${dashboardsBaseId}/${dashboardsTableName}?filterByFormula=AND(username="${username}")`;
+    const username1 = JSON.parse(cookieData1).username;
+  const dashboardsAccessToken1 = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
+  const dashboardsBaseId1 = 'appj9R8cdDKBA2Khb';
+  const dashboardsTableName1 = 'accounts';
+  const dashboardsUrl1 = `https://api.airtable.com/v0/${dashboardsBaseId1}/${dashboardsTableName1}?filterByFormula=AND(username="${username1}")`;
 
-  function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) {
-      return parts.pop().split(';').shift();
+  function getCookie1(name) {
+    const value1 = `; ${document.cookie}`;
+    const parts1 = value1.split(`; ${name}=`);
+    if (parts1.length === 2) {
+      return parts1.pop().split(';').shift();
     }
   }
 
-  
-    
+    const pinEl = document.querySelector("#pin1 span");
 
-    const balanceEl = document.querySelector("#balance span");
-    const digiCashEl = document.querySelector("#digi-cash span");
-
-    fetch(dashboardsUrl, {
+    fetch(dashboardsUrl1, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${dashboardsAccessToken}`,
+        Authorization: `Bearer ${dashboardsAccessToken1}`,
         "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Data from Airtable API: ", data);
-        const userRecord = data.records[0];
-        const userBalance = userRecord.fields.balance;
-        const formattedBalance = userBalance.toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-        });
-        balanceEl.innerHTML = formattedBalance.match(/[\d\.]+/)[0];
-        digiCashEl.innerHTML = "DigiCash";
+        const userRecord1 = data.records[0];
+        const userPin1 = userRecord1.fields.pin;
+        pinEl.innerHTML = userPin1;
       })
       .catch((error) => {
         console.log("Error fetching data from Airtable API: ", error);
-        balanceEl.innerHTML = "Error fetching balance";
+        pinEl.innerHTML = "Error fetching pin";
       });
   };
 
-  getBalance();
+  getBalance1();
 </script>
-</div>
+
+</div><!-- End: PIN -->
+                </div><!-- End: Balance container -->
             </div>
             <footer class="bg-white sticky-footer" style="background: transparent;">
                 <div class="container my-auto">
