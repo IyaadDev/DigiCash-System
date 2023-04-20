@@ -135,30 +135,31 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                             <div></div>
                         </div><!-- CSS for the custom number input field -->
  <form>
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" name="quantity" value="1">
-    <button type="submit">Calculate Price</button>
-  </form>
-  
-  <script>
-    var pricey;
+  <label for="convertQuantity">Quantity:</label>
+  <input type="number" id="convertQuantity" name="convertQuantity" value="1">
+  <button type="submit">Calculate Price</button>
+</form>
 
-    fetch('price.txt')
-      .then(response => response.text())
-      .then(data => {
-        pricey = parseFloat(data);
-        console.log('Price fetched:', pricey);
-      })
-      .catch(error => console.error('Error fetching price:', error));
+<script>
+  var convertPricey;
 
-    document.querySelector('form').addEventListener('submit', event => {
-      event.preventDefault();
+  fetch('price.txt')
+    .then(response => response.text())
+    .then(data => {
+      convertPricey = parseFloat(data);
+      console.log('Price fetched:', convertPricey);
+    })
+    .catch(error => console.error('Error fetching price:', error));
 
-      const quantity = parseFloat(document.querySelector('#quantity').value);
-      const total = pricey * quantity;
-      console.log('Total price:', total);
-    });
-  </script>
+  document.querySelector('form').addEventListener('submit', event => {
+    event.preventDefault();
+
+    const convertQuantity = parseFloat(document.querySelector('#convertQuantity').value);
+    const convertTotal = convertPricey * convertQuantity;
+    console.log('Total price:', convertTotal);
+  });
+</script>
+
 <style>
   .number-input {
     display: flex;
