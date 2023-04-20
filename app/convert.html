@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Card - Credit Card - DigiCash Dashboard</title>
+    <title>Wallet - DigiCash Dashboard</title>
     <meta name="description" content="The one dashboard to manage your DigiCash. Don't have any? Create an account and get some free credits">
     <link rel="icon" type="image/png" sizes="500x500" href="../assets/img/icon.png?h=65db8f52059975fa40b00e7f7accfb7e">
     <link rel="icon" type="image/png" sizes="500x500" href="../assets/img/icon.png?h=65db8f52059975fa40b00e7f7accfb7e">
@@ -74,7 +74,7 @@
                 <div class="container-fluid" style="padding: 25px;">
                     <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top" style="border-radius: 10px;">
                         <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                            <h3 class="text-dark mb-0" style="font-size: 1rem;">DigiCash Banking System</h3>
+                            <h3 class="text-dark mb-0" style="font-size: 1rem;">DigiCash Wallet</h3>
                             <ul class="navbar-nav flex-nowrap ms-auto">
                                 <li class="nav-item dropdown no-arrow">
                                     <!-- Start: account thign -->
@@ -120,98 +120,212 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                                 </li>
                             </ul>
                         </div>
-                    </nav><!-- Start: Bootstrap Callout Info -->
-                    <div class="bs-callout bs-callout-info">
-                        <h4>Info </h4>
-                        <p>We're still building a withdraw system directly on DigiCash.</p>
-                    </div><!-- End: Bootstrap Callout Info -->
+                    </nav>
                 </div>
                 <div class="container">
-                    <div class="card text-center shadow d-xl-flex align-items-xl-center border-start-success py-2" style="background: repeating-linear-gradient(133deg, #f2f3f7 0%, #eeeefa 50%, #d5e6f8 99%);height: 100%;">
-                        <div class="card-body" style="width: 95%;"><script>
-    const depositAccessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
-const depositBaseId = 'appj9R8cdDKBA2Khb';
-const depositTableName = 'accountants';
-const depositUrl = `https://api.airtable.com/v0/${depositBaseId}/${depositTableName}`;
+                    <div class="card text-center shadow d-xl-flex align-items-xl-center border-start-success py-2" style="background: repeating-linear-gradient(133deg, #f2f3f7 0%, #eeeefa 50%, #d5e6f8 99%);">
+                        <div class="card-body">
+                            <div class="row align-items-center no-gutters">
+                                <div class="col me-2">
+                                    <div class="text-uppercase fw-bold text-success text-xs mb-1"></div>
+                                    <div class="fw-bold text-dark h5 mb-0" id="balance" style="color: rgb(0,0,0);font-size: 31px;"><span></span></div>
+                                    <div class="fw-bold text-success text-xs mb-1" id="digi-cash" style="font-size: 1rem;"><span></span></div>
+                                </div>
+                            </div>
+                            <div></div>
+                        </div><!-- CSS for the custom number input field -->
+<script>
+    var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var pricey = this.responseText;
+    console.log(pricey);
+  }
+};
+xhttp.open("GET", "price.txt", true);
+xhttp.send();
+    </script>
+<style>
+  .number-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      border-radius: 30px;
+  }
 
-fetch(depositUrl, {
-  method: "GET",
-  headers: {
-    Authorization: `Bearer ${depositAccessToken}`,
-    "Content-Type": "application/json",
-  },
-})
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("Data from Airtable API: ", data);
-    const nameRecords = data.records.filter(record => record.fields.name);
-    const randomNameRecord = nameRecords[Math.floor(Math.random() * nameRecords.length)];
-    console.log("Random name record: ", randomNameRecord.fields.name);
-  })
-  .catch((error) => {
-    console.log("Error fetching data from Airtable API: ", error);
-  });
+  .number-input input {
+      text-align: center;
+    margin: 0 10px;
+    width: 40px;
+    height: 75px;
+    border: none;
+    border-bottom: 1px solid gray;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    outline: none;
+      font-family: arial;
+      border-radius: 10px;
+  }
+    input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
+</style>
+
+<!-- HTML for the number input field with automatic movement to next field -->
+<div class="number-input">
+  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
+  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
+  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
+  <input type="number" maxlength="1" onkeyup="checkPIN();" />
+</div>
+
+<!-- JavaScript function for automatic movement to next field -->
+<script>
+    function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) {
+    return parts.pop().split(';').shift();
+  }
+}
+
+  function moveToNext(input) {
+    if (input.value.length >= input.maxLength) {
+      input.nextElementSibling.focus();
+    }
+  }
+  
+  function checkPIN() {
+    // Get the account information from cookie
+    const authAccountInfo = JSON.parse(getCookie('account'));
+      var authAccessToken = "patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d"
+      var authBaseId = "appj9R8cdDKBA2Khb"
+      var authTableName = "accounts"
+    // Get the username from the account information
+    const authUsername = authAccountInfo.username;
+
+    // Fetch data from Airtable
+    fetch(`https://api.airtable.com/v0/${authBaseId}/${authTableName}?filterByFormula=AND(username="${authUsername}")`, {
+      headers: {
+        Authorization: `Bearer ${authAccessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Get the PIN field value from the first record
+        const authPin = data.records[0].fields.pin;
+
+        // Log the parsed username and PIN
+        console.log(authUsername);
+        console.log(authPin);
+
+        // Select the number input fields
+        const authNumberInputs = document.querySelectorAll('.number-input input');
+
+        // Add event listener to the last input field to check for correct PIN
+        authNumberInputs[authNumberInputs.length - 1].addEventListener('keyup', (event) => {
+          // Get the values of all input fields and combine them
+          const authCombinedInputs = Array.from(authNumberInputs).map((input) => input.value).join('');
+
+          // Check if combined input matches the PIN
+          if (authCombinedInputs === authPin.toString()) {
+            // Set the auth cookie to true
+            function setCookie(name, value, minutes) {
+  const date = new Date();
+  date.setTime(date.getTime() + (minutes * 60 * 1000));
+  const expires = "; expires=" + date.toUTCString();
+  document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+// Set the "auth" cookie with value "true" and expiration of 15 minutes
+setCookie("auth", "true", 15);
+
+
+            // Redirect to success page
+            window.location.href = 'auth-success.html';
+          } else {
+            // Redirect to failure page
+            window.location.href = 'auth-fail.html';
+          }
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  checkPIN();
 </script>
-                            <h1 style="color: rgb(0,0,0);">Withdraw agents</h1>
-                            <p style="color: rgb(0,0,0);">Meet up with a withdraw agent to collect funds</p><iframe class="airtable-embed" src="https://airtable.com/embed/shrmCtBhrB6mZyneC?backgroundColor=red&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent;border: 1px solid #ccc;"></iframe>
-                        </div>
+
+
+
+  
+
                     </div>
                 </div>
-                <div class="container text-center" style="margin: 20px;"><a class="btn btn-primary" role="button" style="background: var(--bs-border-color-translucent);color: rgb(0,0,0);" href="wallet.html"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-skip-backward" style="font-size: 19px;">
-                            <path d="M.5 3.5A.5.5 0 0 1 1 4v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v2.94l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L8.5 8.752v2.94c0 .653-.713.998-1.233.696L1 8.752V12a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm7 1.133L1.696 8 7.5 11.367V4.633zm7.5 0L9.196 8 15 11.367V4.633z"></path>
-                        </svg>&nbsp;Go back</a></div><!-- Start: Balance container -->
-                <div class="col text-center d-flex d-xl-flex justify-content-center justify-content-xl-end">
-                    <!-- Start: PIN -->
-                    <div style="margin: 20px;background: #ffffff;border-radius: 7px;width: 346.05px;"><div id="pin1" class="fw-bold text-dark h5 mb-0" style="color: rgb(0,0,0);font-size: 31px;"><span style="font-size: 1.50rem;">Loading...</span></div>
-<script>
-    const getBalance1 = () => {
-    const cookieData1 = getCookie1("account");
-    if (!cookieData1) {
+                <div class="col-md-6 col-xl-3 mb-4"><script>
+    const getBalance = () => {
+    const cookieData = getCookie("account");
+    if (!cookieData) {
       console.log("No user data found in cookie.");
       return;
     }
-    const username1 = JSON.parse(cookieData1).username;
-  const dashboardsAccessToken1 = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
-  const dashboardsBaseId1 = 'appj9R8cdDKBA2Khb';
-  const dashboardsTableName1 = 'accounts';
-  const dashboardsUrl1 = `https://api.airtable.com/v0/${dashboardsBaseId1}/${dashboardsTableName1}?filterByFormula=AND(username="${username1}")`;
+    const username = JSON.parse(cookieData).username;
+  const dashboardsAccessToken = 'patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d';
+  const dashboardsBaseId = 'appj9R8cdDKBA2Khb';
+  const dashboardsTableName = 'accounts';
+  const dashboardsUrl = `https://api.airtable.com/v0/${dashboardsBaseId}/${dashboardsTableName}?filterByFormula=AND(username="${username}")`;
 
-  function getCookie1(name) {
-    const value1 = `; ${document.cookie}`;
-    const parts1 = value1.split(`; ${name}=`);
-    if (parts1.length === 2) {
-      return parts1.pop().split(';').shift();
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop().split(';').shift();
     }
   }
 
-    const pinEl = document.querySelector("#pin1 span");
+  
+    
 
-    fetch(dashboardsUrl1, {
+    const balanceEl = document.querySelector("#balance span");
+    const digiCashEl = document.querySelector("#digi-cash span");
+
+    fetch(dashboardsUrl, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${dashboardsAccessToken1}`,
+        Authorization: `Bearer ${dashboardsAccessToken}`,
         "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Data from Airtable API: ", data);
-        const userRecord1 = data.records[0];
-        const userPin1 = userRecord1.fields.pin;
-        pinEl.innerHTML = userPin1;
+        const userRecord = data.records[0];
+        const userBalance = userRecord.fields.balance;
+        const formattedBalance = userBalance.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        });
+        balanceEl.innerHTML = formattedBalance.match(/[\d\.]+/)[0];
+        digiCashEl.innerHTML = "DigiCash";
       })
       .catch((error) => {
         console.log("Error fetching data from Airtable API: ", error);
-        pinEl.innerHTML = "Error fetching pin";
+        balanceEl.innerHTML = "Error fetching balance";
       });
   };
 
-  getBalance1();
+  getBalance();
 </script>
-
-</div><!-- End: PIN -->
-                </div><!-- End: Balance container -->
+</div>
             </div>
             <footer class="bg-white sticky-footer" style="background: transparent;">
                 <div class="container my-auto">
