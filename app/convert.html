@@ -133,14 +133,8 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                                 </div>
                             </div>
                             <div></div>
-                        </div><!-- CSS for the custom number input field -->
- <form>
-  <label for="convertQuantity">Quantity:</label>
-  <input type="number" id="convertQuantity" name="convertQuantity" value="1">
-  <button type="submit">Calculate Price</button>
-</form>
-
-<script>
+                        </div>
+                        <form><label class="form-label" for="convertQuantity">Quantity:</label><input type="number" id="convertQuantity" name="convertQuantity" value="1"><button type="submit">Calculate Price</button></form><script>
   var convertPricey;
 
   fetch('price.txt')
@@ -159,131 +153,6 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
     console.log('Total price:', convertTotal);
   });
 </script>
-
-<style>
-  .number-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-      border-radius: 30px;
-  }
-
-  .number-input input {
-      text-align: center;
-    margin: 0 10px;
-    width: 40px;
-    height: 75px;
-    border: none;
-    border-bottom: 1px solid gray;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 5px;
-    outline: none;
-      font-family: arial;
-      border-radius: 10px;
-  }
-    input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-</style>
-
-<!-- HTML for the number input field with automatic movement to next field -->
-<div class="number-input">
-  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
-  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
-  <input type="number" maxlength="1" onkeyup="moveToNext(this)" />
-  <input type="number" maxlength="1" onkeyup="checkPIN();" />
-</div>
-
-<!-- JavaScript function for automatic movement to next field -->
-<script>
-    function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) {
-    return parts.pop().split(';').shift();
-  }
-}
-
-  function moveToNext(input) {
-    if (input.value.length >= input.maxLength) {
-      input.nextElementSibling.focus();
-    }
-  }
-  
-  function checkPIN() {
-    // Get the account information from cookie
-    const authAccountInfo = JSON.parse(getCookie('account'));
-      var authAccessToken = "patDs6HNgXDsAGKtn.b4b12d712365527fb18967b9d0a6002800857dc8309181510f6963ad2b45019d"
-      var authBaseId = "appj9R8cdDKBA2Khb"
-      var authTableName = "accounts"
-    // Get the username from the account information
-    const authUsername = authAccountInfo.username;
-
-    // Fetch data from Airtable
-    fetch(`https://api.airtable.com/v0/${authBaseId}/${authTableName}?filterByFormula=AND(username="${authUsername}")`, {
-      headers: {
-        Authorization: `Bearer ${authAccessToken}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Get the PIN field value from the first record
-        const authPin = data.records[0].fields.pin;
-
-        // Log the parsed username and PIN
-        console.log(authUsername);
-        console.log(authPin);
-
-        // Select the number input fields
-        const authNumberInputs = document.querySelectorAll('.number-input input');
-
-        // Add event listener to the last input field to check for correct PIN
-        authNumberInputs[authNumberInputs.length - 1].addEventListener('keyup', (event) => {
-          // Get the values of all input fields and combine them
-          const authCombinedInputs = Array.from(authNumberInputs).map((input) => input.value).join('');
-
-          // Check if combined input matches the PIN
-          if (authCombinedInputs === authPin.toString()) {
-            // Set the auth cookie to true
-            function setCookie(name, value, minutes) {
-  const date = new Date();
-  date.setTime(date.getTime() + (minutes * 60 * 1000));
-  const expires = "; expires=" + date.toUTCString();
-  document.cookie = name + "=" + value + expires + "; path=/";
-}
-
-// Set the "auth" cookie with value "true" and expiration of 15 minutes
-setCookie("auth", "true", 15);
-
-
-            // Redirect to success page
-            window.location.href = 'auth-success.html';
-          } else {
-            // Redirect to failure page
-            window.location.href = 'auth-fail.html';
-          }
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  checkPIN();
-</script>
-
-
-
-  
-
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3 mb-4"><script>
