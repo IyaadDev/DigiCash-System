@@ -134,17 +134,31 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                             </div>
                             <div></div>
                         </div><!-- CSS for the custom number input field -->
-<script>
-    var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    var pricey = this.responseText;
-    console.log(pricey);
-  }
-};
-xhttp.open("GET", "price.txt", true);
-xhttp.send();
-    </script>
+ <form>
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" value="1">
+    <button type="submit">Calculate Price</button>
+  </form>
+  
+  <script>
+    var pricey;
+
+    fetch('price.txt')
+      .then(response => response.text())
+      .then(data => {
+        pricey = parseFloat(data);
+        console.log('Price fetched:', pricey);
+      })
+      .catch(error => console.error('Error fetching price:', error));
+
+    document.querySelector('form').addEventListener('submit', event => {
+      event.preventDefault();
+
+      const quantity = parseFloat(document.querySelector('#quantity').value);
+      const total = pricey * quantity;
+      console.log('Total price:', total);
+    });
+  </script>
 <style>
   .number-input {
     display: flex;
