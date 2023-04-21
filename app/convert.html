@@ -14,12 +14,12 @@
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css?h=cb606d99bb2418df19b6bc818b41e412">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono&amp;display=swap">
-    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css?h=e7cfb9ec830984d637c4aed91cd725c5">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-all.min.css?h=bb270fba1988038f5680f75b7475565e">
     <link rel="stylesheet" href="../assets/css/animated-services.css?h=999aac9edd71396446e18beb66d01a03">
     <link rel="stylesheet" href="../assets/css/Articles-Cards-images.css?h=4f3cfa46e40e236365345fc77963f4b8">
-    <link rel="stylesheet" href="../assets/css/Bootstrap-Callout-Danger.css?h=42712a1218a3f115163d943aef23cb21">
+    <link rel="stylesheet" href="../assets/css/Bootstrap-Callout-Danger.css?h=a01ce0f06f835595f67acd16b3bf64e9">
     <link rel="stylesheet" href="../assets/css/Bootstrap-Callout-Info.css?h=15b43fafd5928244e49dc20add914164">
-    <link rel="stylesheet" href="../assets/css/Navbar-Right-Links-Dark-icons.css?h=1fb7478465b62bffaafc5ff7d3ec5853">
+    <link rel="stylesheet" href="../assets/css/Navbar-Right-Links-Dark-icons.css?h=0665e33d047a1482292ef967f3a249e2">
 </head>
 
 <body id="page-top">
@@ -133,39 +133,9 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
                                 </div>
                             </div>
                             <div></div>
-                        </div><!-- CSS for the custom number input field -->
- <form>
-  <label for="convertQuantity">Quantity:</label>
-  <input type="number" id="convertQuantity" name="convertQuantity" value="1">
-  <button type="submit">Calculate Price</button>
-</form>
-
-<script>
-  var convertPricey;
-
-  fetch('price.txt')
-    .then(response => response.text())
-    .then(data => {
-      convertPricey = parseFloat(data);
-      console.log('Price fetched:', convertPricey);
-    })
-    .catch(error => console.error('Error fetching price:', error));
-
-  document.querySelector('form').addEventListener('submit', event => {
-    event.preventDefault();
-
-    const convertQuantity = parseFloat(document.querySelector('#convertQuantity').value);
-    const convertTotal = convertPricey * convertQuantity;
-    console.log('Total price:', convertTotal);
-  });
-    console.log(userBalance);
-    console.log(formattedBalance);
-</script>
-
-
-                    </div>
-                </div>
-                <div class="col-md-6 col-xl-3 mb-4"><script>
+                        </div><script>
+    let userBalance;
+let formattedBalance;
     const getBalance = () => {
     const cookieData = getCookie("account");
     if (!cookieData) {
@@ -186,8 +156,6 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
     }
   }
 
-  
-    
 
     const balanceEl = document.querySelector("#balance span");
     const digiCashEl = document.querySelector("#digi-cash span");
@@ -219,7 +187,39 @@ nameSpan.innerHTML = `${firstName} ${lastName}`;
 
   getBalance();
 </script>
-</div>
+<!-- CSS for the custom number input field -->
+ <form>
+  <label for="convertQuantity">Quantity:</label>
+  <input type="number" id="convertQuantity" name="convertQuantity" value="1">
+  <button type="submit">Calculate Price</button>
+</form>
+
+<script>
+  var convertPricey;
+
+  fetch('price.txt')
+    .then(response => response.text())
+    .then(data => {
+      convertPricey = parseFloat(data);
+      console.log('Price fetched:', convertPricey);
+    })
+    .catch(error => console.error('Error fetching price:', error));
+
+  document.querySelector('form').addEventListener('submit', event => {
+    event.preventDefault();
+
+    const convertQuantity = parseFloat(document.querySelector('#convertQuantity').value);
+    const convertTotal = convertPricey * convertQuantity;
+    console.log('Total price:', convertTotal);
+  });
+    console.log(userBalance);
+    console.log(formattedBalance);
+</script>
+
+
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3 mb-4"></div>
             </div>
             <footer class="bg-white sticky-footer" style="background: transparent;">
                 <div class="container my-auto">
